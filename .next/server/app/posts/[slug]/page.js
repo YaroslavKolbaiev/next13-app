@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
@@ -558,7 +558,9 @@ function Head({ params: { slug  }  }) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ PostPage)
+/* harmony export */   "default": () => (/* binding */ PostPage),
+/* harmony export */   "generateStaticParams": () => (/* binding */ generateStaticParams),
+/* harmony export */   "revalidate": () => (/* binding */ revalidate)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8499);
 /* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27);
@@ -617,13 +619,14 @@ async function PostPage({ params: { slug  }  }) {
             })
         ]
     });
-} // export async function generateStaticParams() {
- //   const posts = await mongoDb.getAllPosts();
- //   return posts.map((postPath: Posts) => ({
- //     slug: postPath.slug,
- //   }));
- // }
- // export const revalidate = 10;
+}
+async function generateStaticParams() {
+    const posts = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getAllPosts */ .ZP.getAllPosts();
+    return posts.map((postPath)=>({
+            slug: postPath.slug
+        }));
+}
+const revalidate = 10;
 
 
 /***/ }),

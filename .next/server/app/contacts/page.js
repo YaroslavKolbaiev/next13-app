@@ -268,7 +268,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
@@ -505,7 +505,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8499);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5468);
-/* harmony import */ var _componetns_Contacts_Contacts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1340);
+/* harmony import */ var _componetns_Contacts_Contacts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7508);
 /* harmony import */ var _componetns_Contacts_Contacts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_componetns_Contacts_Contacts__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -525,7 +525,7 @@ function Contact() {
 
 /***/ }),
 
-/***/ 1340:
+/***/ 7508:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /* __next_internal_client_entry_do_not_use__ */ const { createProxy  } = __webpack_require__(4353);

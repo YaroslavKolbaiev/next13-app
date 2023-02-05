@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
@@ -403,11 +403,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5829:
+/***/ 0:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 9346));
-Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 9797, 23))
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 9797, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 9346))
 
 /***/ }),
 
