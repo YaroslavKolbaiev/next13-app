@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import Comments from '../../../componetns/Comments/Comments';
 import mongoDb from '../../../helpers/db-util';
-// import { Posts } from '../../../types/Posts';
+import { Posts } from '../../../types/Posts';
 
 type Props = {
   params: {
@@ -45,12 +45,12 @@ export default async function PostPage({ params: { slug } }: Props) {
   );
 }
 
-// export async function generateStaticParams() {
-//   const posts = await mongoDb.getAllPosts();
+export async function generateStaticParams() {
+  const posts = await mongoDb.getAllPosts();
 
-//   return posts.map((postPath: Posts) => ({
-//     slug: postPath.slug,
-//   }));
-// }
+  return posts.map((postPath: Posts) => ({
+    slug: postPath.slug,
+  }));
+}
 
-// export const revalidate = 10;
+export const revalidate = 10;
