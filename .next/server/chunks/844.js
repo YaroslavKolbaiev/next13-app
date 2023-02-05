@@ -70,7 +70,7 @@ function Head() {
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
                 rel: "icon",
-                href: "/favicon.ico"
+                href: "/favicon-32x32.png"
             })
         ]
     });
