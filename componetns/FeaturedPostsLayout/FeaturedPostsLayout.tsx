@@ -21,8 +21,17 @@ export default function FeaturedPostsLayout({ posts, adventureTitle }: Props) {
           }) => (
             <div key={_id} className="column is-one-third">
               <div className="box p-0">
-                <figure className="image is-square">
-                  <Image src={`/posts/${image}`} alt="picture of post" fill />
+                <figure className="image">
+                  <Image
+                    style={{
+                      height: '260px',
+                      objectFit: 'cover',
+                    }}
+                    src={image}
+                    alt="picture of post"
+                    width={300}
+                    height={300}
+                  />
                 </figure>
                 <div className="p-3 has-background-dark">
                   <p className="title is-4 has-text-light has-text-centered">
@@ -30,7 +39,7 @@ export default function FeaturedPostsLayout({ posts, adventureTitle }: Props) {
                   </p>
                   <Link
                     href={`/posts/${slug}`}
-                    className="button is-fullwidth is-primary"
+                    className="button is-fullwidth is-info is-light"
                   >
                     Explore Post
                   </Link>

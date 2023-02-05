@@ -1,0 +1,29 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[7].use[3]!./componetns/Account/Account.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.Account_logoText__PkabF {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.Account_logoWrapper__caWBz {
+  position: relative;
+  background: none;
+  border: none;
+  transition: 300ms;
+}
+
+.Account_logoWrapper__caWBz:hover {
+  transform: scale(1.1);
+}
+
+.Account_logoImage__z7_Ke {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+

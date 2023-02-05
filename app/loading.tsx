@@ -1,15 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
+import LoadingComp from '../componetns/LoadingComp/LoadingComp';
 
 export default function Loading() {
   return (
-    <section className="hero is-dark is-fullheight">
-      <div className="hero-body">
-        <div className="">
-          <p className="title">Loading please wait..</p>
-        </div>
-      </div>
-    </section>
+    <LoadingComp />
   );
 }

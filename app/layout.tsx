@@ -1,5 +1,10 @@
+'use client';
+
+import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 import 'bulma/css/bulma.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+
 import MainNav from '../componetns/MainNav/MainNav';
 
 type Props = {
@@ -9,14 +14,12 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className="has-background-grey-lighter">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
       <head />
       <body>
-        <MainNav />
-        {children}
+        <SessionProvider>
+          <MainNav />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

@@ -6,6 +6,6 @@ export default async function AllPostsPage() {
   const allPosts = await mongoDb.getAllPosts();
 
   return (
-    <PostsLayout posts={allPosts} adventureTitle="All Posts" />
+    <PostsLayout posts={allPosts} />
   );
 }

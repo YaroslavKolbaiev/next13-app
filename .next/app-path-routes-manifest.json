@@ -1,7 +1,0 @@
-{
-  "/page": "/",
-  "/posts/page": "/posts",
-  "/contacts/page": "/contacts",
-  "/posts/[slug]/page": "/posts/[slug]",
-  "/newpost/page": "/newpost"
-}

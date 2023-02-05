@@ -1,1 +1,740 @@
-self.__RSC_MANIFEST={"__ssr_module_mapping__":{"30":{"":{"id":"9797","name":"","chunks":["30:30-e96edab485d20d62","333:app/posts/[slug]/page-45b24d571fd38385"],"async":false},"*":{"id":"9797","name":"*","chunks":["30:30-e96edab485d20d62","333:app/posts/[slug]/page-45b24d571fd38385"],"async":false},"default":{"id":"9797","name":"default","chunks":["30:30-e96edab485d20d62","333:app/posts/[slug]/page-45b24d571fd38385"],"async":false}},"91":{"":{"id":"1480","name":"","chunks":["601:app/error-3d064862beebe60f"],"async":false},"*":{"id":"1480","name":"*","chunks":["601:app/error-3d064862beebe60f"],"async":false},"default":{"id":"1480","name":"default","chunks":["601:app/error-3d064862beebe60f"],"async":false}},"1608":{"":{"id":"2167","name":"","chunks":["353:353-85dbd811319f8835","613:app/contacts/page-b97576c4ec4215e5"],"async":false},"*":{"id":"2167","name":"*","chunks":["353:353-85dbd811319f8835","613:app/contacts/page-b97576c4ec4215e5"],"async":false},"default":{"id":"2167","name":"default","chunks":["353:353-85dbd811319f8835","613:app/contacts/page-b97576c4ec4215e5"],"async":false}},"2092":{"":{"id":"6862","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"6862","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"6862","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"2346":{"":{"id":"2767","name":"","chunks":["555:app/loading-8663cf24309a4a35"],"async":false},"*":{"id":"2767","name":"*","chunks":["555:app/loading-8663cf24309a4a35"],"async":false},"default":{"id":"2767","name":"default","chunks":["555:app/loading-8663cf24309a4a35"],"async":false}},"4090":{"":{"id":"2919","name":"","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"*":{"id":"2919","name":"*","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"default":{"id":"2919","name":"default","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false}},"7043":{"":{"id":"2030","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"2030","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"2030","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"7382":{"":{"id":"3113","name":"","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"*":{"id":"3113","name":"*","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"default":{"id":"3113","name":"default","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false}},"7954":{"":{"id":"9446","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"9446","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"9446","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"8069":{"":{"id":"9346","name":"","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","931:app/page-331151817cfca69f"],"async":false},"*":{"id":"9346","name":"*","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","931:app/page-331151817cfca69f"],"async":false},"default":{"id":"9346","name":"default","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","931:app/page-331151817cfca69f"],"async":false}},"9617":{"":{"id":"811","name":"","chunks":["353:353-85dbd811319f8835","944:app/newpost/page-dee32eed10aadc06"],"async":false},"*":{"id":"811","name":"*","chunks":["353:353-85dbd811319f8835","944:app/newpost/page-dee32eed10aadc06"],"async":false},"default":{"id":"811","name":"default","chunks":["353:353-85dbd811319f8835","944:app/newpost/page-dee32eed10aadc06"],"async":false}},"9875":{"":{"id":"3258","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"3258","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"3258","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}}},"__edge_ssr_module_mapping__":{},"__entry_css_files__":{"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\page":["static/css/f9cc8742f80771a9.css"],"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout":["static/css/9ffeea93daed4b2f.css"]},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\app-router.js":{"":{"id":"7954","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"7954","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"7954","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\error-boundary.js":{"":{"id":"7043","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"7043","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"7043","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\layout-router.js":{"":{"id":"9875","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"9875","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"9875","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\render-from-template-context.js":{"":{"id":"2092","name":"","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"*":{"id":"2092","name":"*","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false},"default":{"id":"2092","name":"default","chunks":["272:webpack-a71868839212209e","17:17-85f91729e8c02074","744:main-app-cc3e2acc9c1351bd"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\link.js":{"":{"id":"4090","name":"","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"*":{"id":"4090","name":"*","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"default":{"id":"4090","name":"default","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\error.tsx":{"":{"id":"91","name":"","chunks":["601:app/error-3d064862beebe60f"],"async":false},"*":{"id":"91","name":"*","chunks":["601:app/error-3d064862beebe60f"],"async":false},"default":{"id":"91","name":"default","chunks":["601:app/error-3d064862beebe60f"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\loading.tsx":{"":{"id":"2346","name":"","chunks":["555:app/loading-8663cf24309a4a35"],"async":false},"*":{"id":"2346","name":"*","chunks":["555:app/loading-8663cf24309a4a35"],"async":false},"default":{"id":"2346","name":"default","chunks":["555:app/loading-8663cf24309a4a35"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\image.js":{"":{"id":"30","name":"","chunks":["30:30-e96edab485d20d62","333:app/posts/[slug]/page-45b24d571fd38385"],"async":false},"*":{"id":"30","name":"*","chunks":["30:30-e96edab485d20d62","333:app/posts/[slug]/page-45b24d571fd38385"],"async":false},"default":{"id":"30","name":"default","chunks":["30:30-e96edab485d20d62","333:app/posts/[slug]/page-45b24d571fd38385"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\FeaturedPostsLayout\\FeaturedPostsLayout.tsx":{"":{"id":"8069","name":"","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","931:app/page-331151817cfca69f"],"async":false},"*":{"id":"8069","name":"*","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","931:app/page-331151817cfca69f"],"async":false},"default":{"id":"8069","name":"default","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","931:app/page-331151817cfca69f"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\PostsLayout\\PostsLayout.tsx":{"":{"id":"7382","name":"","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"*":{"id":"7382","name":"*","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false},"default":{"id":"7382","name":"default","chunks":["90:90-a479053ec747786a","30:30-e96edab485d20d62","991:app/posts/page-075ae814ab3f93de"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Contacts\\Contacts.tsx":{"":{"id":"1608","name":"","chunks":["353:353-85dbd811319f8835","613:app/contacts/page-b97576c4ec4215e5"],"async":false},"*":{"id":"1608","name":"*","chunks":["353:353-85dbd811319f8835","613:app/contacts/page-b97576c4ec4215e5"],"async":false},"default":{"id":"1608","name":"default","chunks":["353:353-85dbd811319f8835","613:app/contacts/page-b97576c4ec4215e5"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\newpost\\NewPost.tsx":{"":{"id":"9617","name":"","chunks":["353:353-85dbd811319f8835","944:app/newpost/page-dee32eed10aadc06"],"async":false},"*":{"id":"9617","name":"*","chunks":["353:353-85dbd811319f8835","944:app/newpost/page-dee32eed10aadc06"],"async":false},"default":{"id":"9617","name":"default","chunks":["353:353-85dbd811319f8835","944:app/newpost/page-dee32eed10aadc06"],"async":false}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Hero\\Hero.module.css":{"default":{"id":"2130","name":"default","chunks":["static/css/f9cc8742f80771a9.css"]}},"D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\bulma\\css\\bulma.css":{"default":{"id":"null","name":"default","chunks":["static/css/9ffeea93daed4b2f.css"]}}}
+self.__RSC_MANIFEST={
+  "__ssr_module_mapping__": {
+    "(app-client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx": {
+      "": {
+        "id": "(sc_client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx",
+        "name": "",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx",
+        "name": "*",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx",
+        "name": "default",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./node_modules/next/dist/client/image.js": {
+      "": {
+        "id": "(sc_client)/./node_modules/next/dist/client/image.js",
+        "name": "",
+        "chunks": [
+          "app/posts/page:app/posts/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./node_modules/next/dist/client/image.js",
+        "name": "*",
+        "chunks": [
+          "app/posts/page:app/posts/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./node_modules/next/dist/client/image.js",
+        "name": "default",
+        "chunks": [
+          "app/posts/page:app/posts/page"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./app/layout.tsx": {
+      "": {
+        "id": "(sc_client)/./app/layout.tsx",
+        "name": "",
+        "chunks": [
+          "app/layout:app/layout"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./app/layout.tsx",
+        "name": "*",
+        "chunks": [
+          "app/layout:app/layout"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./app/layout.tsx",
+        "name": "default",
+        "chunks": [
+          "app/layout:app/layout"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./app/error.tsx": {
+      "": {
+        "id": "(sc_client)/./app/error.tsx",
+        "name": "",
+        "chunks": [
+          "app/error:app/error"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./app/error.tsx",
+        "name": "*",
+        "chunks": [
+          "app/error:app/error"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./app/error.tsx",
+        "name": "default",
+        "chunks": [
+          "app/error:app/error"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./app/loading.tsx": {
+      "": {
+        "id": "(sc_client)/./app/loading.tsx",
+        "name": "",
+        "chunks": [
+          "app/loading:app/loading"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./app/loading.tsx",
+        "name": "*",
+        "chunks": [
+          "app/loading:app/loading"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./app/loading.tsx",
+        "name": "default",
+        "chunks": [
+          "app/loading:app/loading"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./node_modules/next/dist/client/components/app-router.js": {
+      "": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/app-router.js",
+        "name": "",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/app-router.js",
+        "name": "*",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/app-router.js",
+        "name": "default",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./node_modules/next/dist/client/components/error-boundary.js": {
+      "": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/error-boundary.js",
+        "name": "",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/error-boundary.js",
+        "name": "*",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/error-boundary.js",
+        "name": "default",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./node_modules/next/dist/client/components/layout-router.js": {
+      "": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/layout-router.js",
+        "name": "",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/layout-router.js",
+        "name": "*",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/layout-router.js",
+        "name": "default",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./node_modules/next/dist/client/components/render-from-template-context.js": {
+      "": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/render-from-template-context.js",
+        "name": "",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/render-from-template-context.js",
+        "name": "*",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./node_modules/next/dist/client/components/render-from-template-context.js",
+        "name": "default",
+        "chunks": [
+          "app-client-internals:app-client-internals"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./componetns/Comments/Comments.tsx": {
+      "": {
+        "id": "(sc_client)/./componetns/Comments/Comments.tsx",
+        "name": "",
+        "chunks": [
+          "app/posts/[slug]/page:app/posts/[slug]/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./componetns/Comments/Comments.tsx",
+        "name": "*",
+        "chunks": [
+          "app/posts/[slug]/page:app/posts/[slug]/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./componetns/Comments/Comments.tsx",
+        "name": "default",
+        "chunks": [
+          "app/posts/[slug]/page:app/posts/[slug]/page"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./componetns/AuthForm/AuthForm.tsx": {
+      "": {
+        "id": "(sc_client)/./componetns/AuthForm/AuthForm.tsx",
+        "name": "",
+        "chunks": [
+          "app/auth/page:app/auth/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./componetns/AuthForm/AuthForm.tsx",
+        "name": "*",
+        "chunks": [
+          "app/auth/page:app/auth/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./componetns/AuthForm/AuthForm.tsx",
+        "name": "default",
+        "chunks": [
+          "app/auth/page:app/auth/page"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./componetns/Account/Account.tsx": {
+      "": {
+        "id": "(sc_client)/./componetns/Account/Account.tsx",
+        "name": "",
+        "chunks": [
+          "app/account/page:app/account/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./componetns/Account/Account.tsx",
+        "name": "*",
+        "chunks": [
+          "app/account/page:app/account/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./componetns/Account/Account.tsx",
+        "name": "default",
+        "chunks": [
+          "app/account/page:app/account/page"
+        ],
+        "async": false
+      }
+    },
+    "(app-client)/./componetns/PostsLayout/PostsLayout.tsx": {
+      "": {
+        "id": "(sc_client)/./componetns/PostsLayout/PostsLayout.tsx",
+        "name": "",
+        "chunks": [
+          "app/posts/page:app/posts/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./componetns/PostsLayout/PostsLayout.tsx",
+        "name": "*",
+        "chunks": [
+          "app/posts/page:app/posts/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./componetns/PostsLayout/PostsLayout.tsx",
+        "name": "default",
+        "chunks": [
+          "app/posts/page:app/posts/page"
+        ],
+        "async": false
+      }
+    }
+  },
+  "__edge_ssr_module_mapping__": {},
+  "__entry_css_files__": {
+    "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout": [
+      "static/css/app/layout.css"
+    ],
+    "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\posts\\[slug]\\page": [
+      "static/css/app/posts/[slug]/page.css"
+    ],
+    "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\account\\page": [
+      "static/css/app/account/page.css"
+    ],
+    "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\page": [
+      "static/css/_app-client_componetns_Hero_Hero_module_css.css"
+    ]
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\FeaturedPostsLayout\\FeaturedPostsLayout.tsx": {
+    "": {
+      "id": "(app-client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx",
+      "name": "",
+      "chunks": [
+        "app/page:app/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx",
+      "name": "*",
+      "chunks": [
+        "app/page:app/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./componetns/FeaturedPostsLayout/FeaturedPostsLayout.tsx",
+      "name": "default",
+      "chunks": [
+        "app/page:app/page"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\image.js": {
+    "": {
+      "id": "(app-client)/./node_modules/next/dist/client/image.js",
+      "name": "",
+      "chunks": [
+        "app/posts/page:app/posts/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./node_modules/next/dist/client/image.js",
+      "name": "*",
+      "chunks": [
+        "app/posts/page:app/posts/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./node_modules/next/dist/client/image.js",
+      "name": "default",
+      "chunks": [
+        "app/posts/page:app/posts/page"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\@fortawesome\\fontawesome-free\\css\\all.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/app/layout.css"
+      ]
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\bulma\\css\\bulma.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/app/layout.css"
+      ]
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout.tsx": {
+    "": {
+      "id": "(app-client)/./app/layout.tsx",
+      "name": "",
+      "chunks": [
+        "app/layout:app/layout"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./app/layout.tsx",
+      "name": "*",
+      "chunks": [
+        "app/layout:app/layout"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./app/layout.tsx",
+      "name": "default",
+      "chunks": [
+        "app/layout:app/layout"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\error.tsx": {
+    "": {
+      "id": "(app-client)/./app/error.tsx",
+      "name": "",
+      "chunks": [
+        "app/error:app/error"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./app/error.tsx",
+      "name": "*",
+      "chunks": [
+        "app/error:app/error"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./app/error.tsx",
+      "name": "default",
+      "chunks": [
+        "app/error:app/error"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\loading.tsx": {
+    "": {
+      "id": "(app-client)/./app/loading.tsx",
+      "name": "",
+      "chunks": [
+        "app/loading:app/loading"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./app/loading.tsx",
+      "name": "*",
+      "chunks": [
+        "app/loading:app/loading"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./app/loading.tsx",
+      "name": "default",
+      "chunks": [
+        "app/loading:app/loading"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\app-router.js": {
+    "": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/app-router.js",
+      "name": "",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/app-router.js",
+      "name": "*",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/app-router.js",
+      "name": "default",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\error-boundary.js": {
+    "": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/error-boundary.js",
+      "name": "",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/error-boundary.js",
+      "name": "*",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/error-boundary.js",
+      "name": "default",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\layout-router.js": {
+    "": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/layout-router.js",
+      "name": "",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/layout-router.js",
+      "name": "*",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/layout-router.js",
+      "name": "default",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\node_modules\\next\\dist\\client\\components\\render-from-template-context.js": {
+    "": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/render-from-template-context.js",
+      "name": "",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/render-from-template-context.js",
+      "name": "*",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./node_modules/next/dist/client/components/render-from-template-context.js",
+      "name": "default",
+      "chunks": [
+        "app-client-internals:app-client-internals"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Comments\\Comments.module.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/app/posts/[slug]/page.css"
+      ]
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Comments\\Comments.tsx": {
+    "": {
+      "id": "(app-client)/./componetns/Comments/Comments.tsx",
+      "name": "",
+      "chunks": [
+        "app/posts/[slug]/page:app/posts/[slug]/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./componetns/Comments/Comments.tsx",
+      "name": "*",
+      "chunks": [
+        "app/posts/[slug]/page:app/posts/[slug]/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./componetns/Comments/Comments.tsx",
+      "name": "default",
+      "chunks": [
+        "app/posts/[slug]/page:app/posts/[slug]/page"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\AuthForm\\AuthForm.tsx": {
+    "": {
+      "id": "(app-client)/./componetns/AuthForm/AuthForm.tsx",
+      "name": "",
+      "chunks": [
+        "app/auth/page:app/auth/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./componetns/AuthForm/AuthForm.tsx",
+      "name": "*",
+      "chunks": [
+        "app/auth/page:app/auth/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./componetns/AuthForm/AuthForm.tsx",
+      "name": "default",
+      "chunks": [
+        "app/auth/page:app/auth/page"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Account\\Account.module.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/app/account/page.css"
+      ]
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Account\\Account.tsx": {
+    "": {
+      "id": "(app-client)/./componetns/Account/Account.tsx",
+      "name": "",
+      "chunks": [
+        "app/account/page:app/account/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./componetns/Account/Account.tsx",
+      "name": "*",
+      "chunks": [
+        "app/account/page:app/account/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./componetns/Account/Account.tsx",
+      "name": "default",
+      "chunks": [
+        "app/account/page:app/account/page"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\PostsLayout\\PostsLayout.tsx": {
+    "": {
+      "id": "(app-client)/./componetns/PostsLayout/PostsLayout.tsx",
+      "name": "",
+      "chunks": [
+        "app/posts/page:app/posts/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./componetns/PostsLayout/PostsLayout.tsx",
+      "name": "*",
+      "chunks": [
+        "app/posts/page:app/posts/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./componetns/PostsLayout/PostsLayout.tsx",
+      "name": "default",
+      "chunks": [
+        "app/posts/page:app/posts/page"
+      ],
+      "async": false
+    }
+  },
+  "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\componetns\\Hero\\Hero.module.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/_app-client_componetns_Hero_Hero_module_css.css"
+      ]
+    }
+  }
+}

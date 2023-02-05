@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import classes from "./Hero.module.css";
+import React from 'react';
+import Image from 'next/image';
+import classes from './Hero.module.css';
 
 export default function Hero() {
   return (
@@ -8,14 +8,14 @@ export default function Hero() {
       <div className="hero-body has-text-centered">
         <Image
           className={classes.avatar}
-          src="/images/avatar.jpg"
-          alt="An image showing person"
+          src="/images/logo.jpg"
+          alt="picture displaying logo"
           width={200}
           height={200}
         />
-        <p className="title has-text-grey-light">Hi, I&apos;m iRick</p>
+        <p className="title has-text-grey-light">Blog App</p>
         <p className="subtitle has-text-grey-light">
-          This is a test fullstack blog app about adventures
+          This is a test Next JS 13 fullstack blog app.
         </p>
       </div>
     </section>

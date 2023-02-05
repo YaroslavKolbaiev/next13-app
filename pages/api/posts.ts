@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mongoDb from '../../helpers/db-util';
 
@@ -12,12 +11,13 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     const {
-      slug, title, image, excerpt,
+      slug, title, userEmail, image, excerpt,
     } = req.body;
 
     const newPost = {
       slug,
       title,
+      userEmail,
       image,
       excerpt,
     };

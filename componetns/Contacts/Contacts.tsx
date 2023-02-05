@@ -1,7 +1,5 @@
 'use client';
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
-
 import axios from 'axios';
 import React, { useState } from 'react';
 
@@ -27,7 +25,7 @@ export default function Contacts() {
     };
 
     try {
-      await axios.post('/api/contacts', newContact);
+      axios.post('/api/contacts', newContact);
       setNotification('ok');
     } catch (error) {
       console.log('Fetching failed');
@@ -110,6 +108,7 @@ export default function Contacts() {
             }}
             type="button"
             className="delete"
+            aria-label="contactSubmit"
           />
           {notification === 'ok' && 'Your message has been sent sucsefully'}
           {notification === 'error' && 'Failed to send message'}

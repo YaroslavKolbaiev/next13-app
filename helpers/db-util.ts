@@ -60,7 +60,7 @@ async function getAllPosts() {
 async function getPost(slug: string) {
   const db = await connectDatabase();
   try {
-    const post: any = await db.collection('posts').find({ slug }).toArray();
+    const post: any = await db.collection('posts').findOne({ slug });
     return post;
   } catch (error) {
     throw new Error('Problem with loading posts');
@@ -70,25 +70,26 @@ async function getPost(slug: string) {
 async function createPost(postData: {
   slug: string;
   title: string;
+  userEmail: string;
   image: string;
   excerpt: string;
 }) {
   const {
-    slug, title, image, excerpt,
+    slug, title, userEmail, image, excerpt,
   } = postData;
 
-  if (!slug || !title || !image || !excerpt) {
+  if (!slug || !title || !userEmail || !image || !excerpt) {
     throw new Error('Please provide all data');
   }
 
   const newPost = {
     slug,
     title,
+    userEmail,
     image,
     excerpt,
   };
 
-  // const db = await connectDatabase();
   try {
     await insertDocument('posts', newPost);
     console.log('Created New Post');
@@ -122,12 +123,69 @@ async function createContact(postData: {
   }
 }
 
+async function createComment(commentData: {
+  email: string;
+  text: string;
+  postSlug: string;
+  avatar: string;
+}) {
+  const {
+    email, text, postSlug, avatar,
+  } = commentData;
+
+  if (!email || !text || !postSlug) {
+    throw new Error('Please provide all data');
+  }
+
+  const newComment = {
+    email,
+    text,
+    postSlug,
+    avatar,
+  };
+
+  // const db = await connectDatabase();
+  try {
+    await insertDocument('comments', newComment);
+    console.log('Created New Comment');
+  } catch (error) {
+    throw new Error('Error while creating a new comment');
+  }
+}
+
+async function getComments(slug: string) {
+  const db = await connectDatabase();
+  try {
+    const comments: any = await db
+      .collection('comments')
+      .find({ postSlug: slug })
+      .map((comment) => ({ ...comment, _id: comment._id.toString() }))
+      .toArray();
+    return comments;
+  } catch (error) {
+    throw new Error('Problem with loading comments');
+  }
+}
+
+async function getUser(email: string | null | undefined) {
+  const db = await connectDatabase();
+  try {
+    const user: any = await db.collection('users').findOne({ email });
+    return user;
+  } catch (error) {
+    throw new Error('Problem with loading user');
+  }
+}
+
 const mongoDb = {
   getFeaturedPosts,
   getAllPosts,
   getPost,
   createPost,
   createContact,
+  createComment,
+  getComments,
+  getUser,
 };
 
 export default mongoDb;

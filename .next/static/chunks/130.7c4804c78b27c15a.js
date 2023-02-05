@@ -1,1 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[130],{2130:function(a){a.exports={avatar:"Hero_avatar__GxW2c"}}}]);

@@ -1,4 +1,4 @@
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,6 +10,9 @@ const nextConfig = {
     mongodb_password: "nnrVi69PSk47dpRE",
     mongodb_clustername: "cluster0",
     mongodb_database: "posts-app",
+  },
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
   },
 };
 
