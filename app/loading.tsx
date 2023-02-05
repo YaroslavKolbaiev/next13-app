@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import LoadingComp from '../componetns/LoadingComp/LoadingComp';
 

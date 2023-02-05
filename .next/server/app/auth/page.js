@@ -268,7 +268,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 1224:
+/***/ 4226:
 /***/ ((module) => {
 
 "use strict";
@@ -369,7 +369,7 @@ __webpack_require__.r(__webpack_exports__);
         {
           'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8514, 23)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout.tsx"],
 'error': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 7766, 23)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\error.tsx"],
-'loading': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8074, 23)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\loading.tsx"],
+'loading': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8074)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\loading.tsx"],
 'head': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 447)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\head.tsx"],
         }
       ]
@@ -626,7 +626,7 @@ function AuthForm() {
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [684,685], () => (__webpack_exec__(8345)));
+var __webpack_exports__ = __webpack_require__.X(0, [684,844], () => (__webpack_exec__(8345)));
 module.exports = __webpack_exports__;
 
 })();

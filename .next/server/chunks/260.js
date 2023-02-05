@@ -15,7 +15,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var Stream = _interopDefault(__webpack_require__(2781));
 var http = _interopDefault(__webpack_require__(3685));
 var Url = _interopDefault(__webpack_require__(7310));
-var whatwgUrl = _interopDefault(__webpack_require__(4839));
+var whatwgUrl = _interopDefault(__webpack_require__(1224));
 var https = _interopDefault(__webpack_require__(5687));
 var zlib = _interopDefault(__webpack_require__(9796));
 
@@ -2513,7 +2513,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 4839:
+/***/ 1224:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 

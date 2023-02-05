@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 1224:
+/***/ 4226:
 /***/ ((module) => {
 
 "use strict";
@@ -370,14 +370,14 @@ __webpack_require__.r(__webpack_exports__);
           page: [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 5198)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\posts\\page.tsx"]}]
       },
         {
-          
+          'loading': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 353)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\posts\\loading.tsx"],
         }
       ]
       },
         {
           'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8514, 23)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout.tsx"],
 'error': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 7766, 23)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\error.tsx"],
-'loading': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8074, 23)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\loading.tsx"],
+'loading': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8074)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\loading.tsx"],
 'head': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 447)), "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\head.tsx"],
         }
       ]
@@ -404,6 +404,27 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 3113))
+
+/***/ }),
+
+/***/ 353:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Loading)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8499);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5468);
+/* harmony import */ var _componetns_LoadingComp_LoadingComp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4522);
+
+
+
+function Loading() {
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_componetns_LoadingComp_LoadingComp__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {});
+}
+
 
 /***/ }),
 
@@ -554,14 +575,10 @@ function PostsLayout({ posts  }) {
     const totaItems = (0,react_.useMemo)(()=>posts.length, [
         posts
     ]);
-    const indexOfLastItem = +currentPage * 2;
-    const indexOfFirstItem = indexOfLastItem - 2;
-    const paginationIsDisabled = posts.length <= 2;
-    const visiblePosts = (0,react_.useMemo)(()=>posts.slice(indexOfFirstItem, indexOfLastItem), [
-        posts,
-        indexOfFirstItem,
-        indexOfLastItem
-    ]);
+    const indexOfLastItem = +currentPage * 3;
+    const indexOfFirstItem = indexOfLastItem - 3;
+    const paginationIsDisabled = posts.length <= 3;
+    const visiblePosts = posts.slice(indexOfFirstItem, indexOfLastItem);
     return /*#__PURE__*/ jsx_runtime_.jsx("section", {
         className: "section",
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
@@ -630,7 +647,7 @@ function PostsLayout({ posts  }) {
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [684,198,685,294], () => (__webpack_exec__(1929)));
+var __webpack_exports__ = __webpack_require__.X(0, [684,198,844,294], () => (__webpack_exec__(1929)));
 module.exports = __webpack_exports__;
 
 })();

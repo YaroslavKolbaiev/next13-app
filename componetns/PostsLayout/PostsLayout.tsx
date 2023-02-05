@@ -17,14 +17,11 @@ export default function PostsLayout({ posts }: Props) {
 
   const totaItems = useMemo(() => posts.length, [posts]);
 
-  const indexOfLastItem = +currentPage * 2;
-  const indexOfFirstItem = indexOfLastItem - 2;
-  const paginationIsDisabled = posts.length <= 2;
+  const indexOfLastItem = +currentPage * 3;
+  const indexOfFirstItem = indexOfLastItem - 3;
+  const paginationIsDisabled = posts.length <= 3;
 
-  const visiblePosts = useMemo(
-    (): Posts[] => posts.slice(indexOfFirstItem, indexOfLastItem),
-    [posts, indexOfFirstItem, indexOfLastItem],
-  );
+  const visiblePosts: Posts[] = posts.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <section className="section">
       <div className="container">
