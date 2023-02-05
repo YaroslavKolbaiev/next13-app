@@ -12,7 +12,7 @@ type Props = {
 export default function Pagination({ totalItems }: Props) {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalItems / 2); i += 1) {
+  for (let i = 1; i <= Math.ceil(totalItems / 3); i += 1) {
     pageNumbers.push(i);
   }
 

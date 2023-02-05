@@ -7,5 +7,6 @@ export default async function AccountPage() {
   const session = await getServerSession();
   const user = await mongoDb.getUser(session?.user?.email);
   const { avatar } = user;
+  console.log(user);
   return <Account avatar={avatar} />;
 }

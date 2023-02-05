@@ -580,6 +580,7 @@ async function AccountPage() {
     const session = await (0,next_auth__WEBPACK_IMPORTED_MODULE_1__.getServerSession)();
     const user = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_4__/* ["default"].getUser */ .ZP.getUser(session?.user?.email);
     const { avatar  } = user;
+    console.log(user);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_componetns_Account_Account__WEBPACK_IMPORTED_MODULE_3___default()), {
         avatar: avatar
     });

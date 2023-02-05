@@ -1,9 +1,9 @@
 {
   "/account/page": "/account",
   "/auth/page": "/auth",
-  "/contacts/page": "/contacts",
-  "/newpost/page": "/newpost",
   "/posts/[slug]/page": "/posts/[slug]",
+  "/newpost/page": "/newpost",
   "/page": "/",
+  "/contacts/page": "/contacts",
   "/posts/page": "/posts"
 }

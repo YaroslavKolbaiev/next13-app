@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import Comments from '../../../componetns/Comments/Comments';
 import mongoDb from '../../../helpers/db-util';
-import { Posts } from '../../../types/Posts';
+// import { Posts } from '../../../types/Posts';
 
 type Props = {
   params: {
@@ -12,9 +12,9 @@ type Props = {
 };
 
 export default async function PostPage({ params: { slug } }: Props) {
+  const session = await getServerSession();
   const post = await mongoDb.getPost(slug);
   const comments = await mongoDb.getComments(slug);
-  const session = await getServerSession();
   let user;
   if (session) {
     user = await mongoDb.getUser(session?.user?.email);
@@ -45,14 +45,14 @@ export default async function PostPage({ params: { slug } }: Props) {
   );
 }
 
-export async function generateStaticParams() {
-  const posts = await mongoDb.getAllPosts();
+// export async function generateStaticParams() {
+//   const posts = await mongoDb.getAllPosts();
 
-  return posts.map((postPath: Posts) => ({
-    slug: postPath.slug,
-  }));
-}
+//   return posts.map((postPath: Posts) => ({
+//     slug: postPath.slug,
+//   }));
+// }
 
-export const revalidate = 10;
+// export const revalidate = 10;
 
-export const dynamic = 'force-static';
+// export const dynamic = 'force-static';

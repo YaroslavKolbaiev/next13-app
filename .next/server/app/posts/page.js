@@ -499,7 +499,7 @@ var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 function Pagination({ totalItems  }) {
     const pageNumbers = [];
-    for(let i = 1; i <= Math.ceil(totalItems / 2); i += 1){
+    for(let i = 1; i <= Math.ceil(totalItems / 3); i += 1){
         pageNumbers.push(i);
     }
     const searchParams = (0,navigation.useSearchParams)();

@@ -558,10 +558,7 @@ function Head({ params: { slug  }  }) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ PostPage),
-/* harmony export */   "dynamic": () => (/* binding */ dynamic),
-/* harmony export */   "generateStaticParams": () => (/* binding */ generateStaticParams),
-/* harmony export */   "revalidate": () => (/* binding */ revalidate)
+/* harmony export */   "default": () => (/* binding */ PostPage)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8499);
 /* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27);
@@ -579,9 +576,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 async function PostPage({ params: { slug  }  }) {
+    const session = await (0,next_auth__WEBPACK_IMPORTED_MODULE_1__.getServerSession)();
     const post = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getPost */ .ZP.getPost(slug);
     const comments = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getComments */ .ZP.getComments(slug);
-    const session = await (0,next_auth__WEBPACK_IMPORTED_MODULE_1__.getServerSession)();
     let user;
     if (session) {
         user = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getUser */ .ZP.getUser(session?.user?.email);
@@ -620,15 +617,14 @@ async function PostPage({ params: { slug  }  }) {
             })
         ]
     });
-}
-async function generateStaticParams() {
-    const posts = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getAllPosts */ .ZP.getAllPosts();
-    return posts.map((postPath)=>({
-            slug: postPath.slug
-        }));
-}
-const revalidate = 10;
-const dynamic = "force-static";
+} // export async function generateStaticParams() {
+ //   const posts = await mongoDb.getAllPosts();
+ //   return posts.map((postPath: Posts) => ({
+ //     slug: postPath.slug,
+ //   }));
+ // }
+ // export const revalidate = 10;
+ // export const dynamic = 'force-static';
 
 
 /***/ }),
