@@ -4409,7 +4409,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports.headers = headers;
 exports.previewData = previewData;
 exports.cookies = cookies;
-var _cookies = __webpack_require__(3496);
+var _cookies = __webpack_require__(811);
 var _requestAsyncStorage = __webpack_require__(3269);
 var _staticGenerationBailout = __webpack_require__(3243);
 function headers() {
@@ -4485,7 +4485,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 3496:
+/***/ 811:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6414,7 +6414,7 @@ const isKeyObject = __webpack_require__(2673);
 const decodeJWT = __webpack_require__(7776);
 const base64url = __webpack_require__(3894);
 const defaults = __webpack_require__(3304);
-const parseWwwAuthenticate = __webpack_require__(8958);
+const parseWwwAuthenticate = __webpack_require__(1340);
 const { assertSigningAlgValuesSupport , assertIssuerConfiguration  } = __webpack_require__(5375);
 const pick = __webpack_require__(8623);
 const isPlainObject = __webpack_require__(3089);
@@ -9012,7 +9012,7 @@ module.exports = function pick(object, ...paths) {
 const { STATUS_CODES  } = __webpack_require__(3685);
 const { format  } = __webpack_require__(3837);
 const { OPError  } = __webpack_require__(7929);
-const parseWwwAuthenticate = __webpack_require__(8958);
+const parseWwwAuthenticate = __webpack_require__(1340);
 const throwAuthenticateErrors = (response)=>{
     const params = parseWwwAuthenticate(response.headers["www-authenticate"]);
     if (params.error) {
@@ -9338,7 +9338,7 @@ module.exports = normalize;
 
 /***/ }),
 
-/***/ 8958:
+/***/ 1340:
 /***/ ((module) => {
 
 "use strict";
@@ -9855,7 +9855,7 @@ var _v2 = _interopRequireDefault(__webpack_require__(1912));
 var _v3 = _interopRequireDefault(__webpack_require__(1517));
 var _v4 = _interopRequireDefault(__webpack_require__(36));
 var _nil = _interopRequireDefault(__webpack_require__(4053));
-var _version = _interopRequireDefault(__webpack_require__(2019));
+var _version = _interopRequireDefault(__webpack_require__(7647));
 var _validate = _interopRequireDefault(__webpack_require__(6366));
 var _stringify = _interopRequireDefault(__webpack_require__(3807));
 var _parse = _interopRequireDefault(__webpack_require__(7711));
@@ -10339,7 +10339,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 2019:
+/***/ 7647:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";

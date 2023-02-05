@@ -1,5 +1,5 @@
 J0:[[["",{"children":["contacts",{"children":["",{}]}]},null,null,true],"@1",[["$","title",null,{"children":"Blog-App"}],["$","meta",null,{"content":"width=device-width, initial-scale=1","name":"viewport"}],["$","meta",null,{"name":"description","content":"Created by iRick"}],["$","link",null,{"rel":"icon","href":"/favicon-32x32.png"}]]]]
-M2:{"id":"5193","chunks":["449:4e23d837-d113923a896f131c","953:953-e0d97abada31c4e9","299:299-6702519aa8ab08c2","664:664-5e9fddd584a96985","183:183-6765cc1192839782","185:app/layout-9d448ca5b5d66cc0"],"name":"default","async":true}
+M2:{"id":"5193","chunks":["449:4e23d837-d113923a896f131c","953:953-e0d97abada31c4e9","299:299-357e12a371712950","664:664-5e9fddd584a96985","183:183-6765cc1192839782","185:app/layout-4037bd38d01b2a27"],"name":"default","async":true}
 M3:{"id":"9875","name":"","chunks":["272:webpack-74d77a4873fa14bf","17:17-fd4cf5b949ffeadf","744:main-app-cc3e2acc9c1351bd"],"async":false}
 M4:{"id":"91","chunks":["601:app/error-f1ca0e2d0d290e2d"],"name":"default","async":true}
 M5:{"id":"2092","name":"","chunks":["272:webpack-74d77a4873fa14bf","17:17-fd4cf5b949ffeadf","744:main-app-cc3e2acc9c1351bd"],"async":false}

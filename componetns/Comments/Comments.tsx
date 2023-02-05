@@ -74,29 +74,31 @@ export default function Comments({
           ))}
         </div>
       </article>
-      <article className="media">
-        <div className="media-content">
-          <div style={{ maxWidth: '400px' }} className="field">
-            <p className="control">
-              <textarea
-                onChange={(e) => {
-                  setCommentText(e.target.value);
-                }}
-                value={commentText}
-                className="textarea"
-                placeholder="Add a comment..."
-              />
-            </p>
+      {session && (
+        <article className="media">
+          <div className="media-content">
+            <div style={{ maxWidth: '400px' }} className="field">
+              <p className="control">
+                <textarea
+                  onChange={(e) => {
+                    setCommentText(e.target.value);
+                  }}
+                  value={commentText}
+                  className="textarea"
+                  placeholder="Add a comment..."
+                />
+              </p>
+            </div>
+            <div className="field">
+              <p className="control">
+                <button onClick={addComment} type="button" className="button">
+                  Post comment
+                </button>
+              </p>
+            </div>
           </div>
-          <div className="field">
-            <p className="control">
-              <button onClick={addComment} type="button" className="button">
-                Post comment
-              </button>
-            </p>
-          </div>
-        </div>
-      </article>
+        </article>
+      )}
     </>
   );
 }

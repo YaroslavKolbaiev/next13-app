@@ -800,7 +800,7 @@ function Comments({ excerpt , comments , postSlug , userEmail , avatar  }) {
                     ]
                 })
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx("article", {
+            session && /*#__PURE__*/ jsx_runtime_.jsx("article", {
                 className: "media",
                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                     className: "media-content",
