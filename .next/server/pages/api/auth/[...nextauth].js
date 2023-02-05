@@ -1,85 +1,111 @@
 "use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (() => {
 var exports = {};
-exports.id = "pages/api/auth/[...nextauth]";
-exports.ids = ["pages/api/auth/[...nextauth]"];
+exports.id = 748;
+exports.ids = [748];
 exports.modules = {
 
-/***/ "bcryptjs":
-/*!***************************!*\
-  !*** external "bcryptjs" ***!
-  \***************************/
-/***/ ((module) => {
-
-module.exports = require("bcryptjs");
-
-/***/ }),
-
-/***/ "mongodb":
-/*!**************************!*\
-  !*** external "mongodb" ***!
-  \**************************/
+/***/ 8013:
 /***/ ((module) => {
 
 module.exports = require("mongodb");
 
 /***/ }),
 
-/***/ "next-auth":
-/*!****************************!*\
-  !*** external "next-auth" ***!
-  \****************************/
-/***/ ((module) => {
-
-module.exports = require("next-auth");
-
-/***/ }),
-
-/***/ "next-auth/providers/credentials":
-/*!**************************************************!*\
-  !*** external "next-auth/providers/credentials" ***!
-  \**************************************************/
-/***/ ((module) => {
-
-module.exports = require("next-auth/providers/credentials");
-
-/***/ }),
-
-/***/ "(api)/./helpers/auth.ts":
-/*!*************************!*\
-  !*** ./helpers/auth.ts ***!
-  \*************************/
+/***/ 8841:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"hashPassword\": () => (/* binding */ hashPassword),\n/* harmony export */   \"verifyPassword\": () => (/* binding */ verifyPassword)\n/* harmony export */ });\n/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bcryptjs */ \"bcryptjs\");\n/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bcryptjs__WEBPACK_IMPORTED_MODULE_0__);\n\nasync function hashPassword(password) {\n    const hashedPassword = await (0,bcryptjs__WEBPACK_IMPORTED_MODULE_0__.hash)(password, 12);\n    return hashedPassword;\n}\nasync function verifyPassword(password, hashedPassword) {\n    const isValid = await (0,bcryptjs__WEBPACK_IMPORTED_MODULE_0__.compare)(password, hashedPassword);\n    return isValid;\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9oZWxwZXJzL2F1dGgudHMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUF5QztBQUVsQyxlQUFlRSxhQUFhQyxRQUFnQixFQUFFO0lBQ25ELE1BQU1DLGlCQUFpQixNQUFNSiw4Q0FBSUEsQ0FBQ0csVUFBVTtJQUU1QyxPQUFPQztBQUNULENBQUM7QUFFTSxlQUFlQyxlQUNwQkYsUUFBZ0IsRUFDaEJDLGNBQXNCLEVBQ3RCO0lBQ0EsTUFBTUUsVUFBVSxNQUFNTCxpREFBT0EsQ0FBQ0UsVUFBVUM7SUFFeEMsT0FBT0U7QUFDVCxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbXktYmxvZy1hcHAvLi9oZWxwZXJzL2F1dGgudHM/YmJkOCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBoYXNoLCBjb21wYXJlIH0gZnJvbSAnYmNyeXB0anMnO1xuXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gaGFzaFBhc3N3b3JkKHBhc3N3b3JkOiBzdHJpbmcpIHtcbiAgY29uc3QgaGFzaGVkUGFzc3dvcmQgPSBhd2FpdCBoYXNoKHBhc3N3b3JkLCAxMik7XG5cbiAgcmV0dXJuIGhhc2hlZFBhc3N3b3JkO1xufVxuXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gdmVyaWZ5UGFzc3dvcmQoXG4gIHBhc3N3b3JkOiBzdHJpbmcsXG4gIGhhc2hlZFBhc3N3b3JkOiBzdHJpbmcsXG4pIHtcbiAgY29uc3QgaXNWYWxpZCA9IGF3YWl0IGNvbXBhcmUocGFzc3dvcmQsIGhhc2hlZFBhc3N3b3JkKTtcblxuICByZXR1cm4gaXNWYWxpZDtcbn1cbiJdLCJuYW1lcyI6WyJoYXNoIiwiY29tcGFyZSIsImhhc2hQYXNzd29yZCIsInBhc3N3b3JkIiwiaGFzaGVkUGFzc3dvcmQiLCJ2ZXJpZnlQYXNzd29yZCIsImlzVmFsaWQiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(api)/./helpers/auth.ts\n");
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "c": () => (/* binding */ hashPassword),
+  "G": () => (/* binding */ verifyPassword)
+});
+
+;// CONCATENATED MODULE: external "bcryptjs"
+const external_bcryptjs_namespaceObject = require("bcryptjs");
+;// CONCATENATED MODULE: ./helpers/auth.ts
+
+async function hashPassword(password) {
+    const hashedPassword = await (0,external_bcryptjs_namespaceObject.hash)(password, 12);
+    return hashedPassword;
+}
+async function verifyPassword(password, hashedPassword) {
+    const isValid = await (0,external_bcryptjs_namespaceObject.compare)(password, hashedPassword);
+    return isValid;
+}
+
 
 /***/ }),
 
-/***/ "(api)/./helpers/db-util.ts":
-/*!****************************!*\
-  !*** ./helpers/db-util.ts ***!
-  \****************************/
+/***/ 3647:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"connectClient\": () => (/* binding */ connectClient),\n/* harmony export */   \"connectDatabase\": () => (/* binding */ connectDatabase),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   \"insertDocument\": () => (/* binding */ insertDocument)\n/* harmony export */ });\n/* harmony import */ var mongodb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongodb */ \"mongodb\");\n/* harmony import */ var mongodb__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongodb__WEBPACK_IMPORTED_MODULE_0__);\n/* eslint-disable no-underscore-dangle */ \nconst connectClient = async ()=>{\n    const url = `mongodb+srv://${\"iRick\"}:${\"nnrVi69PSk47dpRE\"}@${\"cluster0\"}.349ywek.mongodb.net/?retryWrites=true&w=majority`;\n    const client = new mongodb__WEBPACK_IMPORTED_MODULE_0__.MongoClient(url);\n    const result = await client.connect();\n    return result;\n};\nconst connectDatabase = async ()=>{\n    let client;\n    try {\n        client = await connectClient();\n    } catch (error) {\n        throw new Error(\"Problem with connetcion to database\");\n    }\n    const db = client.db(\"posts-app\");\n    return db;\n};\nconst insertDocument = async (collection, document)=>{\n    const db = await connectDatabase();\n    const result = await db.collection(collection).insertOne(document);\n    return result;\n};\nasync function getFeaturedPosts() {\n    const db = await connectDatabase();\n    try {\n        const posts = await db.collection(\"posts\").find().limit(3).map((post)=>({\n                ...post,\n                _id: post._id.toString()\n            })).toArray();\n        return posts;\n    } catch (error) {\n        throw new Error(\"Problem with loading posts\");\n    }\n}\nasync function getAllPosts() {\n    const db = await connectDatabase();\n    try {\n        const posts = await db.collection(\"posts\").find().map((post)=>({\n                ...post,\n                _id: post._id.toString()\n            })).toArray();\n        return posts;\n    } catch (error) {\n        throw new Error(\"Problem with loading posts\");\n    }\n}\nasync function getPost(slug) {\n    const db = await connectDatabase();\n    try {\n        const post = await db.collection(\"posts\").findOne({\n            slug\n        });\n        return post;\n    } catch (error) {\n        throw new Error(\"Problem with loading posts\");\n    }\n}\nasync function createPost(postData) {\n    const { slug , title , userEmail , image , excerpt  } = postData;\n    if (!slug || !title || !userEmail || !image || !excerpt) {\n        throw new Error(\"Please provide all data\");\n    }\n    const newPost = {\n        slug,\n        title,\n        userEmail,\n        image,\n        excerpt\n    };\n    // const db = await connectDatabase();\n    try {\n        await insertDocument(\"posts\", newPost);\n        console.log(\"Created New Post\");\n    } catch (error) {\n        throw new Error(\"Error while creating a new post\");\n    }\n}\nasync function createContact(postData) {\n    const { name , email , message  } = postData;\n    if (!name || !email || !message) {\n        throw new Error(\"Please provide all data\");\n    }\n    const newContact = {\n        name,\n        email,\n        message\n    };\n    try {\n        await insertDocument(\"contacts\", newContact);\n        console.log(\"Created New Contact\");\n    } catch (error) {\n        throw new Error(\"Error while creating a new post\");\n    }\n}\nasync function createComment(commentData) {\n    const { email , text , postSlug , avatar  } = commentData;\n    if (!email || !text || !postSlug) {\n        throw new Error(\"Please provide all data\");\n    }\n    const newComment = {\n        email,\n        text,\n        postSlug,\n        avatar\n    };\n    // const db = await connectDatabase();\n    try {\n        await insertDocument(\"comments\", newComment);\n        console.log(\"Created New Comment\");\n    } catch (error) {\n        throw new Error(\"Error while creating a new comment\");\n    }\n}\nasync function getComments(slug) {\n    const db = await connectDatabase();\n    try {\n        const comments = await db.collection(\"comments\").find({\n            postSlug: slug\n        }).map((comment)=>({\n                ...comment,\n                _id: comment._id.toString()\n            })).toArray();\n        return comments;\n    } catch (error) {\n        throw new Error(\"Problem with loading comments\");\n    }\n}\nasync function getUser(email) {\n    const db = await connectDatabase();\n    try {\n        const user = await db.collection(\"users\").findOne({\n            email\n        });\n        return user;\n    } catch (error) {\n        throw new Error(\"Problem with loading user\");\n    }\n}\nconst mongoDb = {\n    getFeaturedPosts,\n    getAllPosts,\n    getPost,\n    createPost,\n    createContact,\n    createComment,\n    getComments,\n    getUser\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mongoDb);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,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UUFDVixPQUFPMEI7SUFDVCxFQUFFLE9BQU8xQyxPQUFPO1FBQ2QsTUFBTSxJQUFJQyxNQUFNLGlDQUFpQztJQUNuRDtBQUNGO0FBRUEsZUFBZTJDLFFBQVFaLEtBQWdDLEVBQUU7SUFDdkQsTUFBTTlCLEtBQUssTUFBTUg7SUFDakIsSUFBSTtRQUNGLE1BQU04QyxPQUFZLE1BQU0zQyxHQUFHRyxVQUFVLENBQUMsU0FBU2UsT0FBTyxDQUFDO1lBQUVZO1FBQU07UUFDL0QsT0FBT2E7SUFDVCxFQUFFLE9BQU83QyxPQUFPO1FBQ2QsTUFBTSxJQUFJQyxNQUFNLDZCQUE2QjtJQUMvQztBQUNGO0FBRUEsTUFBTTZDLFVBQVU7SUFDZHRDO0lBQ0FTO0lBQ0FDO0lBQ0FHO0lBQ0FTO0lBQ0FLO0lBQ0FNO0lBQ0FHO0FBQ0Y7QUFFQSxpRUFBZUUsT0FBT0EsRUFBQyIsInNvdXJjZXMiOlsid2VicGFjazovL215LWJsb2ctYXBwLy4vaGVscGVycy9kYi11dGlsLnRzP2U4MWMiXSwic291cmNlc0NvbnRlbnQiOlsiLyogZXNsaW50LWRpc2FibGUgbm8tdW5kZXJzY29yZS1kYW5nbGUgKi9cbmltcG9ydCB7IE1vbmdvQ2xpZW50IH0gZnJvbSAnbW9uZ29kYic7XG5cbmV4cG9ydCBjb25zdCBjb25uZWN0Q2xpZW50ID0gYXN5bmMgKCkgPT4ge1xuICBjb25zdCB1cmwgPSBgbW9uZ29kYitzcnY6Ly8ke3Byb2Nlc3MuZW52Lm1vbmdvZGJfdXNlcm5hbWV9OiR7cHJvY2Vzcy5lbnYubW9uZ29kYl9wYXNzd29yZH1AJHtwcm9jZXNzLmVudi5tb25nb2RiX2NsdXN0ZXJuYW1lfS4zNDl5d2VrLm1vbmdvZGIubmV0Lz9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHlgO1xuICBjb25zdCBjbGllbnQgPSBuZXcgTW9uZ29DbGllbnQodXJsKTtcbiAgY29uc3QgcmVzdWx0ID0gYXdhaXQgY2xpZW50LmNvbm5lY3QoKTtcblxuICByZXR1cm4gcmVzdWx0O1xufTtcblxuZXhwb3J0IGNvbnN0IGNvbm5lY3REYXRhYmFzZSA9IGFzeW5jICgpID0+IHtcbiAgbGV0IGNsaWVudDtcbiAgdHJ5IHtcbiAgICBjbGllbnQgPSBhd2FpdCBjb25uZWN0Q2xpZW50KCk7XG4gIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgdGhyb3cgbmV3IEVycm9yKCdQcm9ibGVtIHdpdGggY29ubmV0Y2lvbiB0byBkYXRhYmFzZScpO1xuICB9XG5cbiAgY29uc3QgZGIgPSBjbGllbnQuZGIocHJvY2Vzcy5lbnYubW9uZ29kYl9kYXRhYmFzZSk7XG5cbiAgcmV0dXJuIGRiO1xufTtcblxuZXhwb3J0IGNvbnN0IGluc2VydERvY3VtZW50ID0gYXN5bmMgKGNvbGxlY3Rpb246IHN0cmluZywgZG9jdW1lbnQ6IGFueSkgPT4ge1xuICBjb25zdCBkYiA9IGF3YWl0IGNvbm5lY3REYXRhYmFzZSgpO1xuICBjb25zdCByZXN1bHQgPSBhd2FpdCBkYi5jb2xsZWN0aW9uKGNvbGxlY3Rpb24pLmluc2VydE9uZShkb2N1bWVudCk7XG4gIHJldHVybiByZXN1bHQ7XG59O1xuXG5hc3luYyBmdW5jdGlvbiBnZXRGZWF0dXJlZFBvc3RzKCkge1xuICBjb25zdCBkYiA9IGF3YWl0IGNvbm5lY3REYXRhYmFzZSgpO1xuICB0cnkge1xuICAgIGNvbnN0IHBvc3RzOiBhbnkgPSBhd2FpdCBkYlxuICAgICAgLmNvbGxlY3Rpb24oJ3Bvc3RzJylcbiAgICAgIC5maW5kKClcbiAgICAgIC5saW1pdCgzKVxuICAgICAgLm1hcCgocG9zdCkgPT4gKHsgLi4ucG9zdCwgX2lkOiBwb3N0Ll9pZC50b1N0cmluZygpIH0pKVxuICAgICAgLnRvQXJyYXkoKTtcbiAgICByZXR1cm4gcG9zdHM7XG4gIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgdGhyb3cgbmV3IEVycm9yKCdQcm9ibGVtIHdpdGggbG9hZGluZyBwb3N0cycpO1xuICB9XG59XG5cbmFzeW5jIGZ1bmN0aW9uIGdldEFsbFBvc3RzKCkge1xuICBjb25zdCBkYiA9IGF3YWl0IGNvbm5lY3REYXRhYmFzZSgpO1xuICB0cnkge1xuICAgIGNvbnN0IHBvc3RzOiBhbnkgPSBhd2FpdCBkYlxuICAgICAgLmNvbGxlY3Rpb24oJ3Bvc3RzJylcbiAgICAgIC5maW5kKClcbiAgICAgIC5tYXAoKHBvc3QpID0+ICh7IC4uLnBvc3QsIF9pZDogcG9zdC5faWQudG9TdHJpbmcoKSB9KSlcbiAgICAgIC50b0FycmF5KCk7XG4gICAgcmV0dXJuIHBvc3RzO1xuICB9IGNhdGNoIChlcnJvcikge1xuICAgIHRocm93IG5ldyBFcnJvcignUHJvYmxlbSB3aXRoIGxvYWRpbmcgcG9zdHMnKTtcbiAgfVxufVxuXG5hc3luYyBmdW5jdGlvbiBnZXRQb3N0KHNsdWc6IHN0cmluZykge1xuICBjb25zdCBkYiA9IGF3YWl0IGNvbm5lY3REYXRhYmFzZSgpO1xuICB0cnkge1xuICAgIGNvbnN0IHBvc3Q6IGFueSA9IGF3YWl0IGRiLmNvbGxlY3Rpb24oJ3Bvc3RzJykuZmluZE9uZSh7IHNsdWcgfSk7XG4gICAgcmV0dXJuIHBvc3Q7XG4gIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgdGhyb3cgbmV3IEVycm9yKCdQcm9ibGVtIHdpdGggbG9hZGluZyBwb3N0cycpO1xuICB9XG59XG5cbmFzeW5jIGZ1bmN0aW9uIGNyZWF0ZVBvc3QocG9zdERhdGE6IHtcbiAgc2x1Zzogc3RyaW5nO1xuICB0aXRsZTogc3RyaW5nO1xuICB1c2VyRW1haWw6IHN0cmluZztcbiAgaW1hZ2U6IHN0cmluZztcbiAgZXhjZXJwdDogc3RyaW5nO1xufSkge1xuICBjb25zdCB7XG4gICAgc2x1ZywgdGl0bGUsIHVzZXJFbWFpbCwgaW1hZ2UsIGV4Y2VycHQsXG4gIH0gPSBwb3N0RGF0YTtcblxuICBpZiAoIXNsdWcgfHwgIXRpdGxlIHx8ICF1c2VyRW1haWwgfHwgIWltYWdlIHx8ICFleGNlcnB0KSB7XG4gICAgdGhyb3cgbmV3IEVycm9yKCdQbGVhc2UgcHJvdmlkZSBhbGwgZGF0YScpO1xuICB9XG5cbiAgY29uc3QgbmV3UG9zdCA9IHtcbiAgICBzbHVnLFxuICAgIHRpdGxlLFxuICAgIHVzZXJFbWFpbCxcbiAgICBpbWFnZSxcbiAgICBleGNlcnB0LFxuICB9O1xuXG4gIC8vIGNvbnN0IGRiID0gYXdhaXQgY29ubmVjdERhdGFiYXNlKCk7XG4gIHRyeSB7XG4gICAgYXdhaXQgaW5zZXJ0RG9jdW1lbnQoJ3Bvc3RzJywgbmV3UG9zdCk7XG4gICAgY29uc29sZS5sb2coJ0NyZWF0ZWQgTmV3IFBvc3QnKTtcbiAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICB0aHJvdyBuZXcgRXJyb3IoJ0Vycm9yIHdoaWxlIGNyZWF0aW5nIGEgbmV3IHBvc3QnKTtcbiAgfVxufVxuXG5hc3luYyBmdW5jdGlvbiBjcmVhdGVDb250YWN0KHBvc3REYXRhOiB7XG4gIG5hbWU6IHN0cmluZztcbiAgZW1haWw6IHN0cmluZztcbiAgbWVzc2FnZTogc3RyaW5nO1xufSkge1xuICBjb25zdCB7IG5hbWUsIGVtYWlsLCBtZXNzYWdlIH0gPSBwb3N0RGF0YTtcblxuICBpZiAoIW5hbWUgfHwgIWVtYWlsIHx8ICFtZXNzYWdlKSB7XG4gICAgdGhyb3cgbmV3IEVycm9yKCdQbGVhc2UgcHJvdmlkZSBhbGwgZGF0YScpO1xuICB9XG5cbiAgY29uc3QgbmV3Q29udGFjdCA9IHtcbiAgICBuYW1lLFxuICAgIGVtYWlsLFxuICAgIG1lc3NhZ2UsXG4gIH07XG5cbiAgdHJ5IHtcbiAgICBhd2FpdCBpbnNlcnREb2N1bWVudCgnY29udGFjdHMnLCBuZXdDb250YWN0KTtcbiAgICBjb25zb2xlLmxvZygnQ3JlYXRlZCBOZXcgQ29udGFjdCcpO1xuICB9IGNhdGNoIChlcnJvcikge1xuICAgIHRocm93IG5ldyBFcnJvcignRXJyb3Igd2hpbGUgY3JlYXRpbmcgYSBuZXcgcG9zdCcpO1xuICB9XG59XG5cbmFzeW5jIGZ1bmN0aW9uIGNyZWF0ZUNvbW1lbnQoY29tbWVudERhdGE6IHtcbiAgZW1haWw6IHN0cmluZztcbiAgdGV4dDogc3RyaW5nO1xuICBwb3N0U2x1Zzogc3RyaW5nO1xuICBhdmF0YXI6IHN0cmluZztcbn0pIHtcbiAgY29uc3Qge1xuICAgIGVtYWlsLCB0ZXh0LCBwb3N0U2x1ZywgYXZhdGFyLFxuICB9ID0gY29tbWVudERhdGE7XG5cbiAgaWYgKCFlbWFpbCB8fCAhdGV4dCB8fCAhcG9zdFNsdWcpIHtcbiAgICB0aHJvdyBuZXcgRXJyb3IoJ1BsZWFzZSBwcm92aWRlIGFsbCBkYXRhJyk7XG4gIH1cblxuICBjb25zdCBuZXdDb21tZW50ID0ge1xuICAgIGVtYWlsLFxuICAgIHRleHQsXG4gICAgcG9zdFNsdWcsXG4gICAgYXZhdGFyLFxuICB9O1xuXG4gIC8vIGNvbnN0IGRiID0gYXdhaXQgY29ubmVjdERhdGFiYXNlKCk7XG4gIHRyeSB7XG4gICAgYXdhaXQgaW5zZXJ0RG9jdW1lbnQoJ2NvbW1lbnRzJywgbmV3Q29tbWVudCk7XG4gICAgY29uc29sZS5sb2coJ0NyZWF0ZWQgTmV3IENvbW1lbnQnKTtcbiAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICB0aHJvdyBuZXcgRXJyb3IoJ0Vycm9yIHdoaWxlIGNyZWF0aW5nIGEgbmV3IGNvbW1lbnQnKTtcbiAgfVxufVxuXG5hc3luYyBmdW5jdGlvbiBnZXRDb21tZW50cyhzbHVnOiBzdHJpbmcpIHtcbiAgY29uc3QgZGIgPSBhd2FpdCBjb25uZWN0RGF0YWJhc2UoKTtcbiAgdHJ5IHtcbiAgICBjb25zdCBjb21tZW50czogYW55ID0gYXdhaXQgZGJcbiAgICAgIC5jb2xsZWN0aW9uKCdjb21tZW50cycpXG4gICAgICAuZmluZCh7IHBvc3RTbHVnOiBzbHVnIH0pXG4gICAgICAubWFwKChjb21tZW50KSA9PiAoeyAuLi5jb21tZW50LCBfaWQ6IGNvbW1lbnQuX2lkLnRvU3RyaW5nKCkgfSkpXG4gICAgICAudG9BcnJheSgpO1xuICAgIHJldHVybiBjb21tZW50cztcbiAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICB0aHJvdyBuZXcgRXJyb3IoJ1Byb2JsZW0gd2l0aCBsb2FkaW5nIGNvbW1lbnRzJyk7XG4gIH1cbn1cblxuYXN5bmMgZnVuY3Rpb24gZ2V0VXNlcihlbWFpbDogc3RyaW5nIHwgbnVsbCB8IHVuZGVmaW5lZCkge1xuICBjb25zdCBkYiA9IGF3YWl0IGNvbm5lY3REYXRhYmFzZSgpO1xuICB0cnkge1xuICAgIGNvbnN0IHVzZXI6IGFueSA9IGF3YWl0IGRiLmNvbGxlY3Rpb24oJ3VzZXJzJykuZmluZE9uZSh7IGVtYWlsIH0pO1xuICAgIHJldHVybiB1c2VyO1xuICB9IGNhdGNoIChlcnJvcikge1xuICAgIHRocm93IG5ldyBFcnJvcignUHJvYmxlbSB3aXRoIGxvYWRpbmcgdXNlcicpO1xuICB9XG59XG5cbmNvbnN0IG1vbmdvRGIgPSB7XG4gIGdldEZlYXR1cmVkUG9zdHMsXG4gIGdldEFsbFBvc3RzLFxuICBnZXRQb3N0LFxuICBjcmVhdGVQb3N0LFxuICBjcmVhdGVDb250YWN0LFxuICBjcmVhdGVDb21tZW50LFxuICBnZXRDb21tZW50cyxcbiAgZ2V0VXNlcixcbn07XG5cbmV4cG9ydCBkZWZhdWx0IG1vbmdvRGI7XG4iXSwibmFtZXMiOlsiTW9uZ29DbGllbnQiLCJjb25uZWN0Q2xpZW50IiwidXJsIiwicHJvY2VzcyIsImVudiIsIm1vbmdvZGJfdXNlcm5hbWUiLCJtb25nb2RiX3Bhc3N3b3JkIiwibW9uZ29kYl9jbHVzdGVybmFtZSIsImNsaWVudCIsInJlc3VsdCIsImNvbm5lY3QiLCJjb25uZWN0RGF0YWJhc2UiLCJlcnJvciIsIkVycm9yIiwiZGIiLCJtb25nb2RiX2RhdGFiYXNlIiwiaW5zZXJ0RG9jdW1lbnQiLCJjb2xsZWN0aW9uIiwiZG9jdW1lbnQiLCJpbnNlcnRPbmUiLCJnZXRGZWF0dXJlZFBvc3RzIiwicG9zdHMiLCJmaW5kIiwibGltaXQiLCJtYXAiLCJwb3N0IiwiX2lkIiwidG9TdHJpbmciLCJ0b0FycmF5IiwiZ2V0QWxsUG9zdHMiLCJnZXRQb3N0Iiwic2x1ZyIsImZpbmRPbmUiLCJjcmVhdGVQb3N0IiwicG9zdERhdGEiLCJ0aXRsZSIsInVzZXJFbWFpbCIsImltYWdlIiwiZXhjZXJwdCIsIm5ld1Bvc3QiLCJjb25zb2xlIiwibG9nIiwiY3JlYXRlQ29udGFjdCIsIm5hbWUiLCJlbWFpbCIsIm1lc3NhZ2UiLCJuZXdDb250YWN0IiwiY3JlYXRlQ29tbWVudCIsImNvbW1lbnREYXRhIiwidGV4dCIsInBvc3RTbHVnIiwiYXZhdGFyIiwibmV3Q29tbWVudCIsImdldENvbW1lbnRzIiwiY29tbWVudHMiLCJjb21tZW50IiwiZ2V0VXNlciIsInVzZXIiLCJtb25nb0RiIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api)/./helpers/db-util.ts\n");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
-/***/ }),
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "authOptions": () => (/* binding */ authOptions),
+  "default": () => (/* binding */ _nextauth_)
+});
 
-/***/ "(api)/./pages/api/auth/[...nextauth].ts":
-/*!*****************************************!*\
-  !*** ./pages/api/auth/[...nextauth].ts ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+;// CONCATENATED MODULE: external "next-auth/providers/credentials"
+const credentials_namespaceObject = require("next-auth/providers/credentials");
+var credentials_default = /*#__PURE__*/__webpack_require__.n(credentials_namespaceObject);
+;// CONCATENATED MODULE: external "next-auth"
+const external_next_auth_namespaceObject = require("next-auth");
+var external_next_auth_default = /*#__PURE__*/__webpack_require__.n(external_next_auth_namespaceObject);
+// EXTERNAL MODULE: ./helpers/auth.ts + 1 modules
+var auth = __webpack_require__(8841);
+// EXTERNAL MODULE: ./helpers/db-util.ts
+var db_util = __webpack_require__(1396);
+;// CONCATENATED MODULE: ./pages/api/auth/[...nextauth].ts
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"authOptions\": () => (/* binding */ authOptions),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var next_auth_providers_credentials__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next-auth/providers/credentials */ \"next-auth/providers/credentials\");\n/* harmony import */ var next_auth_providers_credentials__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_auth_providers_credentials__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next-auth */ \"next-auth\");\n/* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_auth__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../helpers/auth */ \"(api)/./helpers/auth.ts\");\n/* harmony import */ var _helpers_db_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../helpers/db-util */ \"(api)/./helpers/db-util.ts\");\n\n\n\n\nconst authOptions = {\n    providers: [\n        next_auth_providers_credentials__WEBPACK_IMPORTED_MODULE_0___default()({\n            name: \"Credentials\",\n            credentials: {\n                email: {\n                    label: \"email\",\n                    type: \"text\"\n                },\n                password: {\n                    label: \"Password\",\n                    type: \"password\"\n                }\n            },\n            async authorize (credentials) {\n                const { email , password  } = credentials;\n                const db = await (0,_helpers_db_util__WEBPACK_IMPORTED_MODULE_3__.connectDatabase)();\n                const user = await db.collection(\"users\").findOne({\n                    email\n                });\n                if (!user) {\n                    throw new Error(\"No user found!\");\n                }\n                const isValid = await (0,_helpers_auth__WEBPACK_IMPORTED_MODULE_2__.verifyPassword)(password, user.password);\n                if (!isValid) {\n                    throw new Error(\"Password is incorect\");\n                }\n                return user;\n            }\n        })\n    ],\n    session: {\n        strategy: \"jwt\"\n    },\n    secret: process.env.NEXTAUTH_SECRET,\n    jwt: {\n        secret: process.env.NEXTAUTH_SECRET\n    }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (next_auth__WEBPACK_IMPORTED_MODULE_1___default()(authOptions));\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9wYWdlcy9hcGkvYXV0aC9bLi4ubmV4dGF1dGhdLnRzLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQWtFO0FBQ1o7QUFDQztBQUNJO0FBRXBELE1BQU1JLGNBQStCO0lBQzFDQyxXQUFXO1FBQ1RMLHNFQUFtQkEsQ0FBQztZQUNsQk0sTUFBTTtZQUNOQyxhQUFhO2dCQUNYQyxPQUFPO29CQUFFQyxPQUFPO29CQUFTQyxNQUFNO2dCQUFPO2dCQUN0Q0MsVUFBVTtvQkFBRUYsT0FBTztvQkFBWUMsTUFBTTtnQkFBVztZQUNsRDtZQUNBLE1BQU1FLFdBQVVMLFdBQVcsRUFBRTtnQkFDM0IsTUFBTSxFQUFFQyxNQUFLLEVBQUVHLFNBQVEsRUFBRSxHQUFHSjtnQkFFNUIsTUFBTU0sS0FBSyxNQUFNVixpRUFBZUE7Z0JBRWhDLE1BQU1XLE9BQVksTUFBTUQsR0FBR0UsVUFBVSxDQUFDLFNBQVNDLE9BQU8sQ0FBQztvQkFBRVI7Z0JBQU07Z0JBRS9ELElBQUksQ0FBQ00sTUFBTTtvQkFDVCxNQUFNLElBQUlHLE1BQU0sa0JBQWtCO2dCQUNwQyxDQUFDO2dCQUVELE1BQU1DLFVBQVUsTUFBTWhCLDZEQUFjQSxDQUFDUyxVQUFVRyxLQUFLSCxRQUFRO2dCQUU1RCxJQUFJLENBQUNPLFNBQVM7b0JBQ1osTUFBTSxJQUFJRCxNQUFNLHdCQUF3QjtnQkFDMUMsQ0FBQztnQkFFRCxPQUFPSDtZQUNUO1FBQ0Y7S0FDRDtJQUNESyxTQUFTO1FBQ1BDLFVBQVU7SUFDWjtJQUNBQyxRQUFRQyxRQUFRQyxHQUFHLENBQUNDLGVBQWU7SUFDbkNDLEtBQUs7UUFDSEosUUFBUUMsUUFBUUMsR0FBRyxDQUFDQyxlQUFlO0lBQ3JDO0FBQ0YsRUFBRTtBQUNGLGlFQUFldkIsZ0RBQVFBLENBQUNHLFlBQVlBLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9teS1ibG9nLWFwcC8uL3BhZ2VzL2FwaS9hdXRoL1suLi5uZXh0YXV0aF0udHM/MmU4YiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQ3JlZGVudGlhbHNQcm92aWRlciBmcm9tICduZXh0LWF1dGgvcHJvdmlkZXJzL2NyZWRlbnRpYWxzJztcbmltcG9ydCBOZXh0QXV0aCwgeyBOZXh0QXV0aE9wdGlvbnMgfSBmcm9tICduZXh0LWF1dGgnO1xuaW1wb3J0IHsgdmVyaWZ5UGFzc3dvcmQgfSBmcm9tICcuLi8uLi8uLi9oZWxwZXJzL2F1dGgnO1xuaW1wb3J0IHsgY29ubmVjdERhdGFiYXNlIH0gZnJvbSAnLi4vLi4vLi4vaGVscGVycy9kYi11dGlsJztcblxuZXhwb3J0IGNvbnN0IGF1dGhPcHRpb25zOiBOZXh0QXV0aE9wdGlvbnMgPSB7XG4gIHByb3ZpZGVyczogW1xuICAgIENyZWRlbnRpYWxzUHJvdmlkZXIoe1xuICAgICAgbmFtZTogJ0NyZWRlbnRpYWxzJyxcbiAgICAgIGNyZWRlbnRpYWxzOiB7XG4gICAgICAgIGVtYWlsOiB7IGxhYmVsOiAnZW1haWwnLCB0eXBlOiAndGV4dCcgfSxcbiAgICAgICAgcGFzc3dvcmQ6IHsgbGFiZWw6ICdQYXNzd29yZCcsIHR5cGU6ICdwYXNzd29yZCcgfSxcbiAgICAgIH0sXG4gICAgICBhc3luYyBhdXRob3JpemUoY3JlZGVudGlhbHMpIHtcbiAgICAgICAgY29uc3QgeyBlbWFpbCwgcGFzc3dvcmQgfSA9IGNyZWRlbnRpYWxzIGFzIGFueTtcblxuICAgICAgICBjb25zdCBkYiA9IGF3YWl0IGNvbm5lY3REYXRhYmFzZSgpO1xuXG4gICAgICAgIGNvbnN0IHVzZXI6IGFueSA9IGF3YWl0IGRiLmNvbGxlY3Rpb24oJ3VzZXJzJykuZmluZE9uZSh7IGVtYWlsIH0pO1xuXG4gICAgICAgIGlmICghdXNlcikge1xuICAgICAgICAgIHRocm93IG5ldyBFcnJvcignTm8gdXNlciBmb3VuZCEnKTtcbiAgICAgICAgfVxuXG4gICAgICAgIGNvbnN0IGlzVmFsaWQgPSBhd2FpdCB2ZXJpZnlQYXNzd29yZChwYXNzd29yZCwgdXNlci5wYXNzd29yZCk7XG5cbiAgICAgICAgaWYgKCFpc1ZhbGlkKSB7XG4gICAgICAgICAgdGhyb3cgbmV3IEVycm9yKCdQYXNzd29yZCBpcyBpbmNvcmVjdCcpO1xuICAgICAgICB9XG5cbiAgICAgICAgcmV0dXJuIHVzZXI7XG4gICAgICB9LFxuICAgIH0pLFxuICBdLFxuICBzZXNzaW9uOiB7XG4gICAgc3RyYXRlZ3k6ICdqd3QnLFxuICB9LFxuICBzZWNyZXQ6IHByb2Nlc3MuZW52Lk5FWFRBVVRIX1NFQ1JFVCxcbiAgand0OiB7XG4gICAgc2VjcmV0OiBwcm9jZXNzLmVudi5ORVhUQVVUSF9TRUNSRVQsXG4gIH0sXG59O1xuZXhwb3J0IGRlZmF1bHQgTmV4dEF1dGgoYXV0aE9wdGlvbnMpO1xuIl0sIm5hbWVzIjpbIkNyZWRlbnRpYWxzUHJvdmlkZXIiLCJOZXh0QXV0aCIsInZlcmlmeVBhc3N3b3JkIiwiY29ubmVjdERhdGFiYXNlIiwiYXV0aE9wdGlvbnMiLCJwcm92aWRlcnMiLCJuYW1lIiwiY3JlZGVudGlhbHMiLCJlbWFpbCIsImxhYmVsIiwidHlwZSIsInBhc3N3b3JkIiwiYXV0aG9yaXplIiwiZGIiLCJ1c2VyIiwiY29sbGVjdGlvbiIsImZpbmRPbmUiLCJFcnJvciIsImlzVmFsaWQiLCJzZXNzaW9uIiwic3RyYXRlZ3kiLCJzZWNyZXQiLCJwcm9jZXNzIiwiZW52IiwiTkVYVEFVVEhfU0VDUkVUIiwiand0Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api)/./pages/api/auth/[...nextauth].ts\n");
+
+
+
+const authOptions = {
+    providers: [
+        credentials_default()({
+            name: "Credentials",
+            credentials: {
+                email: {
+                    label: "email",
+                    type: "text"
+                },
+                password: {
+                    label: "Password",
+                    type: "password"
+                }
+            },
+            async authorize (credentials) {
+                const { email , password  } = credentials;
+                const db = await (0,db_util/* connectDatabase */.TR)();
+                const user = await db.collection("users").findOne({
+                    email
+                });
+                if (!user) {
+                    throw new Error("No user found!");
+                }
+                const isValid = await (0,auth/* verifyPassword */.G)(password, user.password);
+                if (!isValid) {
+                    throw new Error("Password is incorect");
+                }
+                return user;
+            }
+        })
+    ],
+    session: {
+        strategy: "jwt"
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    jwt: {
+        secret: process.env.NEXTAUTH_SECRET
+    }
+};
+/* harmony default export */ const _nextauth_ = (external_next_auth_default()(authOptions));
+
 
 /***/ })
 
@@ -90,7 +116,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 var __webpack_require__ = require("../../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/auth/[...nextauth].ts"));
+var __webpack_exports__ = __webpack_require__.X(0, [962], () => (__webpack_exec__(3647)));
 module.exports = __webpack_exports__;
 
 })();
