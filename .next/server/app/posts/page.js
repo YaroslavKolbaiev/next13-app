@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
