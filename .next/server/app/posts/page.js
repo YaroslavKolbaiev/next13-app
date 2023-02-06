@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 1224:
+/***/ 4226:
 /***/ ((module) => {
 
 "use strict";
@@ -445,8 +445,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+async function getPosts() {
+    const res = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_3__/* ["default"].getAllPosts */ .ZP.getAllPosts();
+    return res;
+}
 async function AllPostsPage() {
-    const allPosts = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_3__/* ["default"].getAllPosts */ .ZP.getAllPosts();
+    const allPosts = await getPosts();
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_componetns_PostsLayout_PostsLayout__WEBPACK_IMPORTED_MODULE_2___default()), {
         posts: allPosts
     });

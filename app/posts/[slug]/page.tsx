@@ -1,9 +1,8 @@
-import { getServerSession } from 'next-auth';
 import Image from 'next/image';
 import React from 'react';
 import Comments from '../../../componetns/Comments/Comments';
 import mongoDb from '../../../helpers/db-util';
-// import { Posts } from '../../../types/Posts';
+import { Posts } from '../../../types/Posts';
 
 type Props = {
   params: {
@@ -12,14 +11,8 @@ type Props = {
 };
 
 export default async function PostPage({ params: { slug } }: Props) {
-  const session = await getServerSession();
   const post = await mongoDb.getPost(slug);
   const comments = await mongoDb.getComments(slug);
-  let user;
-  if (session) {
-    user = await mongoDb.getUser(session?.user?.email);
-  }
-
   const {
     image, title, excerpt, userEmail,
   } = post;
@@ -34,7 +27,7 @@ export default async function PostPage({ params: { slug } }: Props) {
       </div>
       <div className="hero-body">
         <Comments
-          avatar={user?.avatar}
+          avatar=""
           postSlug={slug}
           comments={comments}
           excerpt={excerpt}
@@ -45,14 +38,12 @@ export default async function PostPage({ params: { slug } }: Props) {
   );
 }
 
-// export async function generateStaticParams() {
-//   const posts = await mongoDb.getAllPosts();
+export async function generateStaticParams() {
+  const posts = await mongoDb.getAllPosts();
 
-//   return posts.map((postPath: Posts) => ({
-//     slug: postPath.slug,
-//   }));
-// }
+  return posts.map((postPath: Posts) => ({
+    slug: postPath.slug,
+  }));
+}
 
-// export const revalidate = 10;
-
-// export const dynamic = 'force-static';
+export const revalidate = 10;

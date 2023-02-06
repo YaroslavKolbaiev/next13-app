@@ -15,7 +15,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var Stream = _interopDefault(__webpack_require__(2781));
 var http = _interopDefault(__webpack_require__(3685));
 var Url = _interopDefault(__webpack_require__(7310));
-var whatwgUrl = _interopDefault(__webpack_require__(4839));
+var whatwgUrl = _interopDefault(__webpack_require__(1224));
 var https = _interopDefault(__webpack_require__(5687));
 var zlib = _interopDefault(__webpack_require__(9796));
 
@@ -2513,7 +2513,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 4839:
+/***/ 1224:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -4834,7 +4834,7 @@ function isVersionServiceProvider(provider) {
 }
 
 const name$o = "@firebase/app";
-const version$1 = "0.9.1";
+const version$1 = "0.9.3";
 
 /**
  * @license
@@ -4901,7 +4901,7 @@ const name$2 = "@firebase/firestore";
 const name$1 = "@firebase/firestore-compat";
 
 const index_esm2017_name = "firebase";
-const version = "9.16.0";
+const version = "9.17.1";
 
 /**
  * @license
@@ -8288,7 +8288,7 @@ CONSTANTS.NODE_CLIENT = true;
 
 
 var name = "firebase";
-var version = "9.16.0";
+var version = "9.17.1";
 
 /**
  * @license
@@ -8325,7 +8325,7 @@ __webpack_require__.d(__webpack_exports__, {
   "B0": () => (/* reexport */ uploadBytesResumable)
 });
 
-// UNUSED EXPORTS: StringFormat, _FbsBlob, _Location, _TaskEvent, _TaskState, _UploadTask, _dataFromString, _getChild, _invalidArgument, _invalidRootOperation, connectStorageEmulator, getBlob, getBytes, getMetadata, getStream, list, listAll, updateMetadata, uploadBytes, uploadString
+// UNUSED EXPORTS: StorageError, StorageErrorCode, StringFormat, _FbsBlob, _Location, _TaskEvent, _TaskState, _UploadTask, _dataFromString, _getChild, _invalidArgument, _invalidRootOperation, connectStorageEmulator, getBlob, getBytes, getMetadata, getStream, list, listAll, updateMetadata, uploadBytes, uploadString
 
 // EXTERNAL MODULE: ./node_modules/@firebase/app/dist/esm/index.esm2017.js + 3 modules
 var index_esm2017 = __webpack_require__(4510);
@@ -8455,19 +8455,53 @@ class StorageError extends index_node_esm/* FirebaseError */.ZR {
         }
     }
 }
+/**
+ * @public
+ * Error codes that can be attached to `StorageError`s.
+ */
+var StorageErrorCode;
+(function (StorageErrorCode) {
+    // Shared between all platforms
+    StorageErrorCode["UNKNOWN"] = "unknown";
+    StorageErrorCode["OBJECT_NOT_FOUND"] = "object-not-found";
+    StorageErrorCode["BUCKET_NOT_FOUND"] = "bucket-not-found";
+    StorageErrorCode["PROJECT_NOT_FOUND"] = "project-not-found";
+    StorageErrorCode["QUOTA_EXCEEDED"] = "quota-exceeded";
+    StorageErrorCode["UNAUTHENTICATED"] = "unauthenticated";
+    StorageErrorCode["UNAUTHORIZED"] = "unauthorized";
+    StorageErrorCode["UNAUTHORIZED_APP"] = "unauthorized-app";
+    StorageErrorCode["RETRY_LIMIT_EXCEEDED"] = "retry-limit-exceeded";
+    StorageErrorCode["INVALID_CHECKSUM"] = "invalid-checksum";
+    StorageErrorCode["CANCELED"] = "canceled";
+    // JS specific
+    StorageErrorCode["INVALID_EVENT_NAME"] = "invalid-event-name";
+    StorageErrorCode["INVALID_URL"] = "invalid-url";
+    StorageErrorCode["INVALID_DEFAULT_BUCKET"] = "invalid-default-bucket";
+    StorageErrorCode["NO_DEFAULT_BUCKET"] = "no-default-bucket";
+    StorageErrorCode["CANNOT_SLICE_BLOB"] = "cannot-slice-blob";
+    StorageErrorCode["SERVER_FILE_WRONG_SIZE"] = "server-file-wrong-size";
+    StorageErrorCode["NO_DOWNLOAD_URL"] = "no-download-url";
+    StorageErrorCode["INVALID_ARGUMENT"] = "invalid-argument";
+    StorageErrorCode["INVALID_ARGUMENT_COUNT"] = "invalid-argument-count";
+    StorageErrorCode["APP_DELETED"] = "app-deleted";
+    StorageErrorCode["INVALID_ROOT_OPERATION"] = "invalid-root-operation";
+    StorageErrorCode["INVALID_FORMAT"] = "invalid-format";
+    StorageErrorCode["INTERNAL_ERROR"] = "internal-error";
+    StorageErrorCode["UNSUPPORTED_ENVIRONMENT"] = "unsupported-environment";
+})(StorageErrorCode || (StorageErrorCode = {}));
 function prependCode(code) {
     return 'storage/' + code;
 }
 function unknown() {
     const message = 'An unknown error occurred, please check the error payload for ' +
         'server response.';
-    return new StorageError("unknown" /* StorageErrorCode.UNKNOWN */, message);
+    return new StorageError(StorageErrorCode.UNKNOWN, message);
 }
 function objectNotFound(path) {
-    return new StorageError("object-not-found" /* StorageErrorCode.OBJECT_NOT_FOUND */, "Object '" + path + "' does not exist.");
+    return new StorageError(StorageErrorCode.OBJECT_NOT_FOUND, "Object '" + path + "' does not exist.");
 }
 function quotaExceeded(bucket) {
-    return new StorageError("quota-exceeded" /* StorageErrorCode.QUOTA_EXCEEDED */, "Quota for bucket '" +
+    return new StorageError(StorageErrorCode.QUOTA_EXCEEDED, "Quota for bucket '" +
         bucket +
         "' exceeded, please view quota on " +
         'https://firebase.google.com/pricing/.');
@@ -8475,49 +8509,49 @@ function quotaExceeded(bucket) {
 function unauthenticated() {
     const message = 'User is not authenticated, please authenticate using Firebase ' +
         'Authentication and try again.';
-    return new StorageError("unauthenticated" /* StorageErrorCode.UNAUTHENTICATED */, message);
+    return new StorageError(StorageErrorCode.UNAUTHENTICATED, message);
 }
 function unauthorizedApp() {
-    return new StorageError("unauthorized-app" /* StorageErrorCode.UNAUTHORIZED_APP */, 'This app does not have permission to access Firebase Storage on this project.');
+    return new StorageError(StorageErrorCode.UNAUTHORIZED_APP, 'This app does not have permission to access Firebase Storage on this project.');
 }
 function unauthorized(path) {
-    return new StorageError("unauthorized" /* StorageErrorCode.UNAUTHORIZED */, "User does not have permission to access '" + path + "'.");
+    return new StorageError(StorageErrorCode.UNAUTHORIZED, "User does not have permission to access '" + path + "'.");
 }
 function retryLimitExceeded() {
-    return new StorageError("retry-limit-exceeded" /* StorageErrorCode.RETRY_LIMIT_EXCEEDED */, 'Max retry time for operation exceeded, please try again.');
+    return new StorageError(StorageErrorCode.RETRY_LIMIT_EXCEEDED, 'Max retry time for operation exceeded, please try again.');
 }
 function canceled() {
-    return new StorageError("canceled" /* StorageErrorCode.CANCELED */, 'User canceled the upload/download.');
+    return new StorageError(StorageErrorCode.CANCELED, 'User canceled the upload/download.');
 }
 function invalidUrl(url) {
-    return new StorageError("invalid-url" /* StorageErrorCode.INVALID_URL */, "Invalid URL '" + url + "'.");
+    return new StorageError(StorageErrorCode.INVALID_URL, "Invalid URL '" + url + "'.");
 }
 function invalidDefaultBucket(bucket) {
-    return new StorageError("invalid-default-bucket" /* StorageErrorCode.INVALID_DEFAULT_BUCKET */, "Invalid default bucket '" + bucket + "'.");
+    return new StorageError(StorageErrorCode.INVALID_DEFAULT_BUCKET, "Invalid default bucket '" + bucket + "'.");
 }
 function noDefaultBucket() {
-    return new StorageError("no-default-bucket" /* StorageErrorCode.NO_DEFAULT_BUCKET */, 'No default bucket ' +
+    return new StorageError(StorageErrorCode.NO_DEFAULT_BUCKET, 'No default bucket ' +
         "found. Did you set the '" +
         CONFIG_STORAGE_BUCKET_KEY +
         "' property when initializing the app?");
 }
 function cannotSliceBlob() {
-    return new StorageError("cannot-slice-blob" /* StorageErrorCode.CANNOT_SLICE_BLOB */, 'Cannot slice blob for upload. Please retry the upload.');
+    return new StorageError(StorageErrorCode.CANNOT_SLICE_BLOB, 'Cannot slice blob for upload. Please retry the upload.');
 }
 function serverFileWrongSize() {
-    return new StorageError("server-file-wrong-size" /* StorageErrorCode.SERVER_FILE_WRONG_SIZE */, 'Server recorded incorrect upload file size, please retry the upload.');
+    return new StorageError(StorageErrorCode.SERVER_FILE_WRONG_SIZE, 'Server recorded incorrect upload file size, please retry the upload.');
 }
 function noDownloadURL() {
-    return new StorageError("no-download-url" /* StorageErrorCode.NO_DOWNLOAD_URL */, 'The given file does not have any download URLs.');
+    return new StorageError(StorageErrorCode.NO_DOWNLOAD_URL, 'The given file does not have any download URLs.');
 }
 /**
  * @internal
  */
 function invalidArgument(message) {
-    return new StorageError("invalid-argument" /* StorageErrorCode.INVALID_ARGUMENT */, message);
+    return new StorageError(StorageErrorCode.INVALID_ARGUMENT, message);
 }
 function appDeleted() {
-    return new StorageError("app-deleted" /* StorageErrorCode.APP_DELETED */, 'The Firebase app was deleted.');
+    return new StorageError(StorageErrorCode.APP_DELETED, 'The Firebase app was deleted.');
 }
 /**
  * @param name - The name of the operation that was invalid.
@@ -8525,7 +8559,7 @@ function appDeleted() {
  * @internal
  */
 function invalidRootOperation(name) {
-    return new StorageError("invalid-root-operation" /* StorageErrorCode.INVALID_ROOT_OPERATION */, "The operation '" +
+    return new StorageError(StorageErrorCode.INVALID_ROOT_OPERATION, "The operation '" +
         name +
         "' cannot be performed on a root reference, create a non-root " +
         "reference using child, such as .child('file.png').");
@@ -8535,13 +8569,13 @@ function invalidRootOperation(name) {
  * @param message - A message describing the format violation.
  */
 function invalidFormat(format, message) {
-    return new StorageError("invalid-format" /* StorageErrorCode.INVALID_FORMAT */, "String does not match format '" + format + "': " + message);
+    return new StorageError(StorageErrorCode.INVALID_FORMAT, "String does not match format '" + format + "': " + message);
 }
 /**
  * @param message - A message describing the internal error.
  */
 function internalError(message) {
-    throw new StorageError("internal-error" /* StorageErrorCode.INTERNAL_ERROR */, 'Internal error: ' + message);
+    throw new StorageError(StorageErrorCode.INTERNAL_ERROR, 'Internal error: ' + message);
 }
 
 /**
@@ -9202,7 +9236,7 @@ function getBlob$1(...args) {
             return new Blob(args);
         }
         else {
-            throw new StorageError("unsupported-environment" /* StorageErrorCode.UNSUPPORTED_ENVIRONMENT */, "This browser doesn't seem to support creating Blobs");
+            throw new StorageError(StorageErrorCode.UNSUPPORTED_ENVIRONMENT, "This browser doesn't seem to support creating Blobs");
         }
     }
 }
@@ -10639,7 +10673,7 @@ class UploadTask {
         this._errorHandler = error => {
             this._request = undefined;
             this._chunkMultiplier = 1;
-            if (error._codeEquals("canceled" /* StorageErrorCode.CANCELED */)) {
+            if (error._codeEquals(StorageErrorCode.CANCELED)) {
                 this._needToFetchStatus = true;
                 this.completeTransitions_();
             }
@@ -10662,7 +10696,7 @@ class UploadTask {
         };
         this._metadataErrorHandler = error => {
             this._request = undefined;
-            if (error._codeEquals("canceled" /* StorageErrorCode.CANCELED */)) {
+            if (error._codeEquals(StorageErrorCode.CANCELED)) {
                 this.completeTransitions_();
             }
             else {
@@ -11685,7 +11719,7 @@ class FirebaseStorageImpl {
 }
 
 const index_node_esm_name = "@firebase/storage";
-const version = "0.10.1";
+const version = "0.11.1";
 
 /**
  * @license

@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 1224:
+/***/ 4226:
 /***/ ((module) => {
 
 "use strict";
@@ -580,7 +580,6 @@ async function AccountPage() {
     const session = await (0,next_auth__WEBPACK_IMPORTED_MODULE_1__.getServerSession)();
     const user = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_4__/* ["default"].getUser */ .ZP.getUser(session?.user?.email);
     const { avatar  } = user;
-    console.log(user);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_componetns_Account_Account__WEBPACK_IMPORTED_MODULE_3___default()), {
         avatar: avatar
     });
@@ -955,7 +954,7 @@ function Account({ avatar  }) {
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [684,449,260,27,198,844,294,169], () => (__webpack_exec__(2516)));
+var __webpack_exports__ = __webpack_require__.X(0, [684,449,260,198,27,844,294,169], () => (__webpack_exec__(2516)));
 module.exports = __webpack_exports__;
 
 })();

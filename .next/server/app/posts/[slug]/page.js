@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 1224:
+/***/ 4226:
 /***/ ((module) => {
 
 "use strict";
@@ -321,94 +321,6 @@ module.exports = require("next/dist/shared/lib/utils.js");
 
 "use strict";
 module.exports = require("next/dist/shared/lib/utils/warn-once.js");
-
-/***/ }),
-
-/***/ 9491:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("assert");
-
-/***/ }),
-
-/***/ 4300:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("buffer");
-
-/***/ }),
-
-/***/ 6113:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("crypto");
-
-/***/ }),
-
-/***/ 2361:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("events");
-
-/***/ }),
-
-/***/ 3685:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("http");
-
-/***/ }),
-
-/***/ 5687:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("https");
-
-/***/ }),
-
-/***/ 3477:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("querystring");
-
-/***/ }),
-
-/***/ 7310:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("url");
-
-/***/ }),
-
-/***/ 3837:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("util");
-
-/***/ }),
-
-/***/ 4655:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("v8");
-
-/***/ }),
-
-/***/ 9796:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("zlib");
 
 /***/ }),
 
@@ -558,31 +470,25 @@ function Head({ params: { slug  }  }) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ PostPage)
+/* harmony export */   "default": () => (/* binding */ PostPage),
+/* harmony export */   "generateStaticParams": () => (/* binding */ generateStaticParams),
+/* harmony export */   "revalidate": () => (/* binding */ revalidate)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8499);
-/* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27);
-/* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_auth__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(634);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5468);
-/* harmony import */ var _componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1391);
-/* harmony import */ var _componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4294);
-
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(634);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5468);
+/* harmony import */ var _componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1391);
+/* harmony import */ var _componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helpers_db_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4294);
 
 
 
 
 
 async function PostPage({ params: { slug  }  }) {
-    const session = await (0,next_auth__WEBPACK_IMPORTED_MODULE_1__.getServerSession)();
-    const post = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getPost */ .ZP.getPost(slug);
-    const comments = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getComments */ .ZP.getComments(slug);
-    let user;
-    if (session) {
-        user = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_5__/* ["default"].getUser */ .ZP.getUser(session?.user?.email);
-    }
+    const post = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_4__/* ["default"].getPost */ .ZP.getPost(slug);
+    const comments = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_4__/* ["default"].getComments */ .ZP.getComments(slug);
     const { image , title , excerpt , userEmail  } = post;
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", {
         className: "hero",
@@ -596,7 +502,7 @@ async function PostPage({ params: { slug  }  }) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("figure", {
                         className: "has-text-centered",
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_1___default()), {
                             src: image,
                             alt: "picture of post",
                             width: 500,
@@ -607,8 +513,8 @@ async function PostPage({ params: { slug  }  }) {
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "hero-body",
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_4___default()), {
-                    avatar: user?.avatar,
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_componetns_Comments_Comments__WEBPACK_IMPORTED_MODULE_3___default()), {
+                    avatar: "",
                     postSlug: slug,
                     comments: comments,
                     excerpt: excerpt,
@@ -617,14 +523,14 @@ async function PostPage({ params: { slug  }  }) {
             })
         ]
     });
-} // export async function generateStaticParams() {
- //   const posts = await mongoDb.getAllPosts();
- //   return posts.map((postPath: Posts) => ({
- //     slug: postPath.slug,
- //   }));
- // }
- // export const revalidate = 10;
- // export const dynamic = 'force-static';
+}
+async function generateStaticParams() {
+    const posts = await _helpers_db_util__WEBPACK_IMPORTED_MODULE_4__/* ["default"].getAllPosts */ .ZP.getAllPosts();
+    return posts.map((postPath)=>({
+            slug: postPath.slug
+        }));
+}
+const revalidate = 10;
 
 
 /***/ }),
@@ -847,7 +753,7 @@ function Comments({ excerpt , comments , postSlug , userEmail , avatar  }) {
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [684,27,844,294], () => (__webpack_exec__(4352)));
+var __webpack_exports__ = __webpack_require__.X(0, [684,844,294], () => (__webpack_exec__(4352)));
 module.exports = __webpack_exports__;
 
 })();
