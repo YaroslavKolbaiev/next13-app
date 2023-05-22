@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
@@ -484,6 +484,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LayoutRouter": () => (/* reexport default from dynamic */ next_dist_client_components_layout_router__WEBPACK_IMPORTED_MODULE_1___default.a),
 /* harmony export */   "RenderFromTemplateContext": () => (/* reexport default from dynamic */ next_dist_client_components_render_from_template_context__WEBPACK_IMPORTED_MODULE_2___default.a),
 /* harmony export */   "__next_app_webpack_require__": () => (/* binding */ __next_app_webpack_require__),
+/* harmony export */   "metadata": () => (/* binding */ metadata),
 /* harmony export */   "pages": () => (/* binding */ pages),
 /* harmony export */   "renderToReadableStream": () => (/* reexport safe */ next_dist_compiled_react_server_dom_webpack_server_browser__WEBPACK_IMPORTED_MODULE_7__.renderToReadableStream),
 /* harmony export */   "requestAsyncStorage": () => (/* reexport safe */ next_dist_client_components_request_async_storage__WEBPACK_IMPORTED_MODULE_5__.requestAsyncStorage),
@@ -531,7 +532,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       ]
       }.children;
-    const pages = ["D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\account\\page.tsx"]
+    const metadata = [{
+          type: 'layout',
+          layer: 0,
+          mod: () => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8514, 23)),
+          path: "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout.tsx",
+        },{
+          type: 'page',
+          layer: 1,
+          mod: () => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8136)),
+          path: "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\account\\page.tsx",
+        },];
+    const pages = ["D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\account\\page.tsx"];
 
     
     
@@ -552,7 +564,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 9835:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 2567))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 2732))
 
 /***/ }),
 
@@ -597,7 +609,7 @@ module.exports = createProxy("D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\com
 
 /***/ }),
 
-/***/ 2567:
+/***/ 2732:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -611,18 +623,33 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(6786);
-// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 43 modules
-var axios = __webpack_require__(4449);
-// EXTERNAL MODULE: ./node_modules/classnames/index.js
-var classnames = __webpack_require__(1198);
-var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
-// EXTERNAL MODULE: ./node_modules/next-auth/react/index.js
-var react = __webpack_require__(3370);
 // EXTERNAL MODULE: ./node_modules/next/image.js
 var next_image = __webpack_require__(8421);
 var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
 // EXTERNAL MODULE: external "next/dist/compiled/react"
 var react_ = __webpack_require__(8038);
+// EXTERNAL MODULE: ./node_modules/classnames/index.js
+var classnames = __webpack_require__(1198);
+var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
+// EXTERNAL MODULE: ./node_modules/next-auth/react/index.js
+var react = __webpack_require__(3370);
+// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 43 modules
+var axios = __webpack_require__(4449);
+;// CONCATENATED MODULE: ./helpers/avatarHandler.ts
+
+async function avatarHandler(event, imageUrl, setIsAvatarImageForm) {
+    event.preventDefault();
+    const avatarData = {
+        avatar: imageUrl
+    };
+    try {
+        await axios/* default.post */.Z.post("/api/user/uploadAvatar", avatarData);
+        setIsAvatarImageForm(false);
+    } catch (error) {
+        console.log("uploading avatar failed");
+    }
+}
+
 // EXTERNAL MODULE: ./helpers/handleCancelImageClick.ts
 var handleCancelImageClick = __webpack_require__(6706);
 // EXTERNAL MODULE: ./helpers/handleFileChange.ts
@@ -693,18 +720,18 @@ function Account({ avatar  }) {
             console.log(error.message);
         }
     }
-    async function avatarHandler(event) {
-        event.preventDefault();
-        const avatarData = {
-            avatar: imageUrl
-        };
-        try {
-            await axios/* default.post */.Z.post("/api/user/uploadAvatar", avatarData);
-            setIsAvatarImageForm(false);
-        } catch (error) {
-            console.log("uploading avatar failed");
-        }
-    }
+    // async function avatarHandler(event: React.FormEvent<HTMLFormElement>) {
+    //   event.preventDefault();
+    //   const avatarData = {
+    //     avatar: imageUrl,
+    //   };
+    //   try {
+    //     await axios.post('/api/user/uploadAvatar', avatarData);
+    //     setIsAvatarImageForm(false);
+    //   } catch (error) {
+    //     console.log('uploading avatar failed');
+    //   }
+    // }
     function handleFile(event) {
         (0,handleFileChange/* default */.Z)(event, setUploadProgress, setImageUrl, setFileInputRef);
     }
@@ -856,7 +883,9 @@ function Account({ avatar  }) {
                                     children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         className: "box",
                                         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("form", {
-                                            onSubmit: avatarHandler,
+                                            onSubmit: (e)=>{
+                                                avatarHandler(e, imageUrl, setIsAvatarImageForm);
+                                            },
                                             children: [
                                                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                                     className: "file is-dark mb-2",

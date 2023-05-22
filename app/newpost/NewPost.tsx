@@ -1,10 +1,10 @@
 'use client';
 
-import axios from 'axios';
 import { getSession, useSession } from 'next-auth/react';
 import { uuid as uuidv4 } from 'uuidv4';
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 import LoadingComp from '../../componetns/LoadingComp/LoadingComp';
 import handleCancelImageClick from '../../helpers/handleCancelImageClick';
 import handleFileChanged from '../../helpers/handleFileChange';

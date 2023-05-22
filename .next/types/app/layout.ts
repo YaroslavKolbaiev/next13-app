@@ -28,6 +28,7 @@ interface IEntry {
   fetchCache?: 'auto' | 'force-no-store' | 'only-no-store' | 'default-no-store' | 'default-cache' | 'only-cache' | 'force-cache'
   preferredRegion?: 'auto' | 'home' | 'edge'
   
+  metadata?: any
 }
 
 // =============

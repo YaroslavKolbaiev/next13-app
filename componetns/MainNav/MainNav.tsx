@@ -20,7 +20,7 @@ export default function MainNav() {
           href="/"
         >
           <Image
-            style={{ borderRadius: '50%', backgroundColor: 'red' }}
+            style={{ borderRadius: '40%', backgroundColor: 'red' }}
             src="/images/logo.jpg"
             alt="picture displaying logo"
             width={50}

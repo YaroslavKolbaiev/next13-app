@@ -276,7 +276,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
@@ -324,7 +324,7 @@ module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 
 /***/ }),
 
-/***/ 6808:
+/***/ 6245:
 /***/ ((module) => {
 
 // Exports
@@ -346,6 +346,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LayoutRouter": () => (/* reexport default from dynamic */ next_dist_client_components_layout_router__WEBPACK_IMPORTED_MODULE_1___default.a),
 /* harmony export */   "RenderFromTemplateContext": () => (/* reexport default from dynamic */ next_dist_client_components_render_from_template_context__WEBPACK_IMPORTED_MODULE_2___default.a),
 /* harmony export */   "__next_app_webpack_require__": () => (/* binding */ __next_app_webpack_require__),
+/* harmony export */   "metadata": () => (/* binding */ metadata),
 /* harmony export */   "pages": () => (/* binding */ pages),
 /* harmony export */   "renderToReadableStream": () => (/* reexport safe */ next_dist_compiled_react_server_dom_webpack_server_browser__WEBPACK_IMPORTED_MODULE_7__.renderToReadableStream),
 /* harmony export */   "requestAsyncStorage": () => (/* reexport safe */ next_dist_client_components_request_async_storage__WEBPACK_IMPORTED_MODULE_5__.requestAsyncStorage),
@@ -401,7 +402,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       ]
       }.children;
-    const pages = ["D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\posts\\[slug]\\page.tsx"]
+    const metadata = [{
+          type: 'layout',
+          layer: 0,
+          mod: () => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8514, 23)),
+          path: "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout.tsx",
+        },{
+          type: 'page',
+          layer: 2,
+          mod: () => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 3048)),
+          path: "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\posts\\[slug]\\page.tsx",
+        },];
+    const pages = ["D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\posts\\[slug]\\page.tsx"];
 
     
     
@@ -625,7 +637,7 @@ const createComment = async (commentsData)=>{
 };
 
 // EXTERNAL MODULE: ./componetns/Comments/Comments.module.css
-var Comments_module = __webpack_require__(6808);
+var Comments_module = __webpack_require__(6245);
 var Comments_module_default = /*#__PURE__*/__webpack_require__.n(Comments_module);
 ;// CONCATENATED MODULE: ./componetns/Comments/Comments.tsx
 

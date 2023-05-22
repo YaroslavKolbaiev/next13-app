@@ -24,7 +24,7 @@ export default function FeaturedPostsLayout({ posts, adventureTitle }: Props) {
                 <figure className="image">
                   <Image
                     style={{
-                      height: '260px',
+                      height: '280px',
                       objectFit: 'cover',
                     }}
                     src={image}

@@ -268,7 +268,7 @@ module.exports = require("next/dist/shared/lib/router/utils/resolve-rewrites.js"
 
 /***/ }),
 
-/***/ 4226:
+/***/ 1224:
 /***/ ((module) => {
 
 "use strict";
@@ -439,6 +439,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LayoutRouter": () => (/* reexport default from dynamic */ next_dist_client_components_layout_router__WEBPACK_IMPORTED_MODULE_1___default.a),
 /* harmony export */   "RenderFromTemplateContext": () => (/* reexport default from dynamic */ next_dist_client_components_render_from_template_context__WEBPACK_IMPORTED_MODULE_2___default.a),
 /* harmony export */   "__next_app_webpack_require__": () => (/* binding */ __next_app_webpack_require__),
+/* harmony export */   "metadata": () => (/* binding */ metadata),
 /* harmony export */   "pages": () => (/* binding */ pages),
 /* harmony export */   "renderToReadableStream": () => (/* reexport safe */ next_dist_compiled_react_server_dom_webpack_server_browser__WEBPACK_IMPORTED_MODULE_7__.renderToReadableStream),
 /* harmony export */   "requestAsyncStorage": () => (/* reexport safe */ next_dist_client_components_request_async_storage__WEBPACK_IMPORTED_MODULE_5__.requestAsyncStorage),
@@ -486,7 +487,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       ]
       }.children;
-    const pages = ["D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\newpost\\page.tsx"]
+    const metadata = [{
+          type: 'layout',
+          layer: 0,
+          mod: () => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8514, 23)),
+          path: "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\layout.tsx",
+        },{
+          type: 'page',
+          layer: 1,
+          mod: () => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 4958)),
+          path: "D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\newpost\\page.tsx",
+        },];
+    const pages = ["D:\\FRONTEND\\NEXT JS\\NEXT_BLOG\\my-blog-app\\app\\newpost\\page.tsx"];
 
     
     
@@ -552,7 +564,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4449);
 /* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3370);
 /* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_auth_react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var uuidv4__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(775);
@@ -560,6 +571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8421);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4449);
 /* harmony import */ var _componetns_LoadingComp_LoadingComp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4644);
 /* harmony import */ var _helpers_handleCancelImageClick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6706);
 /* harmony import */ var _helpers_handleFileChange__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7314);

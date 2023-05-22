@@ -3385,18 +3385,19 @@ Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
 exports["default"] = AppRouter;
-exports.fetchServerResponse = fetchServerResponse;
+exports.urlToUrlWithoutFlightMarker = urlToUrlWithoutFlightMarker;
 var _async_to_generator = (__webpack_require__(4432)/* ["default"] */ .Z);
 var _interop_require_wildcard = (__webpack_require__(1644)/* ["default"] */ .Z);
 var _object_without_properties_loose = (__webpack_require__(2495)/* ["default"] */ .Z);
 var _react = _interop_require_wildcard(__webpack_require__(8038));
-var _client = __webpack_require__(7897);
 var _appRouterContext = __webpack_require__(3280);
-var _reducer = __webpack_require__(7042);
+var _routerReducer = __webpack_require__(3233);
+var _createHrefFromUrl = __webpack_require__(5110);
 var _hooksClientContext = __webpack_require__(9274);
 var _useReducerWithDevtools = __webpack_require__(7410);
 var _errorBoundary = __webpack_require__(2030);
-var _appRouterHeaders = __webpack_require__(4093);
+var _createInitialRouterState = __webpack_require__(7937);
+var _fetchServerResponse = __webpack_require__(9365);
 function AppRouter(props) {
     const { globalErrorComponent  } = props, rest = _object_without_properties_loose(props, [
         "globalErrorComponent"
@@ -3405,50 +3406,14 @@ function AppRouter(props) {
         errorComponent: globalErrorComponent
     }, /*#__PURE__*/ _react.default.createElement(Router, Object.assign({}, rest)));
 }
+// Ensure the initialParallelRoutes are not combined because of double-rendering in the browser with Strict Mode.
+let initialParallelRoutes =  true ? null : 0;
 function urlToUrlWithoutFlightMarker(url) {
     const urlWithoutFlightParameters = new URL(url, location.origin);
     // TODO-APP: handle .rsc for static export case
     return urlWithoutFlightParameters;
 }
 const HotReloader =  true ? null : 0;
-function fetchServerResponse(url, flightRouterState, prefetch) {
-    return _fetchServerResponse.apply(this, arguments);
-}
-function _fetchServerResponse() {
-    _fetchServerResponse = _async_to_generator(function*(url, flightRouterState, prefetch) {
-        const headers = {
-            // Enable flight response
-            [_appRouterHeaders.RSC]: "1",
-            // Provide the current router state
-            [_appRouterHeaders.NEXT_ROUTER_STATE_TREE]: JSON.stringify(flightRouterState)
-        };
-        if (prefetch) {
-            // Enable prefetch response
-            headers[_appRouterHeaders.NEXT_ROUTER_PREFETCH] = "1";
-        }
-        const res = yield fetch(url.toString(), {
-            headers
-        });
-        const canonicalUrl = res.redirected ? urlToUrlWithoutFlightMarker(res.url) : undefined;
-        const isFlightResponse = res.headers.get("content-type") === "application/octet-stream";
-        // If fetch returns something different than flight response handle it like a mpa navigation
-        if (!isFlightResponse) {
-            return [
-                res.url,
-                undefined
-            ];
-        }
-        // Handle the `fetch` readable stream that can be unwrapped by `React.use`.
-        const flightData = yield (0, _client).createFromFetch(Promise.resolve(res));
-        return [
-            flightData,
-            canonicalUrl
-        ];
-    });
-    return _fetchServerResponse.apply(this, arguments);
-}
-// Ensure the initialParallelRoutes are not combined because of double-rendering in the browser with Strict Mode.
-let initialParallelRoutes =  true ? null : 0;
 const prefetched = new Set();
 function findHeadInCache(cache, parallelRoutes) {
     const isLastItem = Object.keys(parallelRoutes).length === 0;
@@ -3476,32 +3441,17 @@ function findHeadInCache(cache, parallelRoutes) {
 /**
  * The global router that wraps the application components.
  */ function Router({ initialHead , initialTree , initialCanonicalUrl , children , assetPrefix  }) {
-    const initialState = (0, _react).useMemo(()=>{
-        return {
-            tree: initialTree,
-            cache: {
-                status: _appRouterContext.CacheStates.READY,
-                data: null,
-                subTreeData: children,
-                parallelRoutes:  true ? new Map() : 0
-            },
-            prefetchCache: new Map(),
-            pushRef: {
-                pendingPush: false,
-                mpaNavigation: false
-            },
-            focusAndScrollRef: {
-                apply: false
-            },
-            canonicalUrl: // This is safe to do as canonicalUrl can't be rendered, it's only used to control the history updates in the useEffect further down in this file.
-             false ? 0 : initialCanonicalUrl
-        };
-    }, [
+    const initialState = (0, _react).useMemo(()=>(0, _createInitialRouterState).createInitialRouterState({
+            children,
+            initialCanonicalUrl,
+            initialTree,
+            initialParallelRoutes
+        }), [
         children,
         initialCanonicalUrl,
         initialTree
     ]);
-    const [{ tree , cache , prefetchCache , pushRef , focusAndScrollRef , canonicalUrl  }, dispatch, sync] = (0, _useReducerWithDevtools).useReducerWithReduxDevtools(_reducer.reducer, initialState);
+    const [{ tree , cache , prefetchCache , pushRef , focusAndScrollRef , canonicalUrl  }, dispatch, sync] = (0, _useReducerWithDevtools).useReducerWithReduxDevtools(_routerReducer.reducer, initialState);
     const head = (0, _react).useMemo(()=>{
         return findHeadInCache(cache, tree[1]);
     }, [
@@ -3527,7 +3477,7 @@ function findHeadInCache(cache, parallelRoutes) {
    * Server response that only patches the cache and tree.
    */ const changeByServerResponse = (0, _react).useCallback((previousTree, flightData, overrideCanonicalUrl)=>{
         dispatch({
-            type: _reducer.ACTION_SERVER_PATCH,
+            type: _routerReducer.ACTION_SERVER_PATCH,
             flightData,
             previousTree,
             overrideCanonicalUrl,
@@ -3547,7 +3497,7 @@ function findHeadInCache(cache, parallelRoutes) {
    */ const appRouter = (0, _react).useMemo(()=>{
         const navigate = (href, navigateType, forceOptimisticNavigation)=>{
             return dispatch({
-                type: _reducer.ACTION_NAVIGATE,
+                type: _routerReducer.ACTION_NAVIGATE,
                 url: new URL(href, location.origin),
                 forceOptimisticNavigation,
                 navigateType,
@@ -3573,11 +3523,11 @@ function findHeadInCache(cache, parallelRoutes) {
                 try {
                     var ref;
                     const routerTree = ((ref = window.history.state) == null ? void 0 : ref.tree) || initialTree;
-                    const serverResponse = yield fetchServerResponse(url, routerTree, true);
+                    const serverResponse = yield (0, _fetchServerResponse).fetchServerResponse(url, routerTree, true);
                     // @ts-ignore startTransition exists
                     _react.default.startTransition(()=>{
                         dispatch({
-                            type: _reducer.ACTION_PREFETCH,
+                            type: _routerReducer.ACTION_PREFETCH,
                             url,
                             tree: routerTree,
                             serverResponse
@@ -3603,7 +3553,7 @@ function findHeadInCache(cache, parallelRoutes) {
                 // @ts-ignore startTransition exists
                 _react.default.startTransition(()=>{
                     dispatch({
-                        type: _reducer.ACTION_REFRESH,
+                        type: _routerReducer.ACTION_REFRESH,
                         cache: {
                             status: _appRouterContext.CacheStates.LAZY_INITIALIZED,
                             data: null,
@@ -3633,7 +3583,7 @@ function findHeadInCache(cache, parallelRoutes) {
             __NA: true,
             tree
         };
-        if (pushRef.pendingPush && (0, _reducer).createHrefFromUrl(new URL(window.location.href)) !== canonicalUrl) {
+        if (pushRef.pendingPush && (0, _createHrefFromUrl).createHrefFromUrl(new URL(window.location.href)) !== canonicalUrl) {
             // This intentionally mutates React state, pushRef is overwritten to ensure additional push/replace calls do not trigger an additional history entry.
             pushRef.pendingPush = false;
             window.history.pushState(historyState, "", canonicalUrl);
@@ -3669,7 +3619,7 @@ function findHeadInCache(cache, parallelRoutes) {
         // Without startTransition works if the cache is there for this path
         _react.default.startTransition(()=>{
             dispatch({
-                type: _reducer.ACTION_RESTORE,
+                type: _routerReducer.ACTION_RESTORE,
                 url: new URL(window.location.href),
                 tree: state.tree
             });
@@ -3971,11 +3921,12 @@ var _interop_require_wildcard = (__webpack_require__(1644)/* ["default"] */ .Z);
 var _react = _interop_require_wildcard(__webpack_require__(8038));
 var _reactDom = _interop_require_default(__webpack_require__(8704));
 var _appRouterContext = __webpack_require__(3280);
-var _appRouter = __webpack_require__(9446);
+var _fetchServerResponse = __webpack_require__(9365);
 var _infinitePromise = __webpack_require__(9864);
 var _errorBoundary = __webpack_require__(2030);
 var _matchSegments = __webpack_require__(6197);
 var _navigation = __webpack_require__(2575);
+var _router = __webpack_require__(4387);
 function OuterLayoutRouter({ parallelRouterKey , segmentPath , childProp , error , errorStyles , templateStyles , loading , loadingStyles , hasLoading , template , notFound , notFoundStyles  }) {
     const context = (0, _react).useContext(_appRouterContext.LayoutRouterContext);
     if (!context) {
@@ -4081,10 +4032,10 @@ function OuterLayoutRouter({ parallelRouterKey , segmentPath , childProp , error
     return _reactDom.default.findDOMNode(instance);
 }
 /**
- * Check if the top of the HTMLElement is in the viewport.
- */ function topOfElementInViewport(element) {
+ * Check if the top corner of the HTMLElement is in the viewport.
+ */ function topOfElementInViewport(element, viewportHeight) {
     const rect = element.getBoundingClientRect();
-    return rect.top >= 0;
+    return rect.top >= 0 && rect.top <= viewportHeight;
 }
 class ScrollAndFocusHandler extends _react.default.Component {
     componentDidMount() {
@@ -4094,20 +4045,31 @@ class ScrollAndFocusHandler extends _react.default.Component {
         if (focusAndScrollRef.apply && domNode instanceof HTMLElement) {
             // State is mutated to ensure that the focus and scroll is applied only once.
             focusAndScrollRef.apply = false;
+            (0, _router).handleSmoothScroll(()=>{
+                // Store the current viewport height because reading `clientHeight` causes a reflow,
+                // and it won't change during this function.
+                const htmlElement = document.documentElement;
+                const viewportHeight = htmlElement.clientHeight;
+                // If the element's top edge is already in the viewport, exit early.
+                if (topOfElementInViewport(domNode, viewportHeight)) {
+                    return;
+                }
+                // Otherwise, try scrolling go the top of the document to be backward compatible with pages
+                // scrollIntoView() called on `<html/>` element scrolls horizontally on chrome and firefox (that shouldn't happen)
+                // We could use it to scroll horizontally following RTL but that also seems to be broken - it will always scroll left
+                // scrollLeft = 0 also seems to ignore RTL and manually checking for RTL is too much hassle so we will scroll just vertically
+                htmlElement.scrollTop = 0;
+                // Scroll to domNode if domNode is not in viewport when scrolled to top of document
+                if (!topOfElementInViewport(domNode, viewportHeight)) {
+                    // Scroll into view doesn't scroll horizontally by default when not needed
+                    domNode.scrollIntoView();
+                }
+            }, {
+                // We will force layout by querying domNode position
+                dontForceLayout: true
+            });
             // Set focus on the element
             domNode.focus();
-            // Only scroll into viewport when the layout is not visible currently.
-            if (!topOfElementInViewport(domNode)) {
-                const htmlElement = document.documentElement;
-                const existing = htmlElement.style.scrollBehavior;
-                htmlElement.style.scrollBehavior = "auto";
-                // In Chrome-based browsers we need to force reflow before calling `scrollTo`.
-                // Otherwise it will not pickup the change in scrollBehavior
-                // More info here: https://github.com/vercel/next.js/issues/40719#issuecomment-1336248042
-                htmlElement.getClientRects();
-                domNode.scrollIntoView();
-                htmlElement.style.scrollBehavior = existing;
-            }
         }
     }
     render() {
@@ -4161,7 +4123,7 @@ path  }) {
      * Flight data fetch kicked off during render and put into the cache.
      */ childNodes.set(path, {
             status: _appRouterContext.CacheStates.DATA_FETCH,
-            data: (0, _appRouter).fetchServerResponse(new URL(url, location.origin), refetchTree),
+            data: (0, _fetchServerResponse).fetchServerResponse(new URL(url, location.origin), refetchTree),
             subTreeData: null,
             head: childNode && childNode.status === _appRouterContext.CacheStates.LAZY_INITIALIZED ? childNode.head : undefined,
             parallelRoutes: childNode && childNode.status === _appRouterContext.CacheStates.LAZY_INITIALIZED ? childNode.parallelRoutes : new Map()
@@ -4556,7 +4518,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 7042:
+/***/ 6862:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -4564,15 +4526,209 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
-exports.createHrefFromUrl = createHrefFromUrl;
-exports.reducer = exports.ACTION_PREFETCH = exports.ACTION_SERVER_PATCH = exports.ACTION_RESTORE = exports.ACTION_NAVIGATE = exports.ACTION_REFRESH = void 0;
-var _extends = (__webpack_require__(7688)/* ["default"] */ .Z);
+exports["default"] = RenderFromTemplateContext;
+var _interop_require_wildcard = (__webpack_require__(1644)/* ["default"] */ .Z);
+var _react = _interop_require_wildcard(__webpack_require__(8038));
 var _appRouterContext = __webpack_require__(3280);
+function RenderFromTemplateContext() {
+    const children = (0, _react).useContext(_appRouterContext.TemplateContext);
+    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, children);
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=render-from-template-context.js.map
+
+
+/***/ }),
+
+/***/ 9705:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.applyRouterStatePatchToTree = applyRouterStatePatchToTree;
+var _extends = (__webpack_require__(7688)/* ["default"] */ .Z);
 var _matchSegments = __webpack_require__(6197);
-var _appRouter = __webpack_require__(9446);
-/**
- * Create data fetching record for Promise.
- */ // TODO-APP: change `any` to type inference.
+function applyRouterStatePatchToTree(flightSegmentPath, flightRouterState, treePatch) {
+    const [segment, parallelRoutes, , , isRootLayout] = flightRouterState;
+    // Root refresh
+    if (flightSegmentPath.length === 1) {
+        const tree = [
+            ...treePatch
+        ];
+        return tree;
+    }
+    const [currentSegment, parallelRouteKey] = flightSegmentPath;
+    // Tree path returned from the server should always match up with the current tree in the browser
+    if (!(0, _matchSegments).matchSegment(currentSegment, segment)) {
+        return null;
+    }
+    const lastSegment = flightSegmentPath.length === 2;
+    let parallelRoutePatch;
+    if (lastSegment) {
+        parallelRoutePatch = treePatch;
+    } else {
+        parallelRoutePatch = applyRouterStatePatchToTree(flightSegmentPath.slice(2), parallelRoutes[parallelRouteKey], treePatch);
+        if (parallelRoutePatch === null) {
+            return null;
+        }
+    }
+    const tree = [
+        flightSegmentPath[0],
+        _extends({}, parallelRoutes, {
+            [parallelRouteKey]: parallelRoutePatch
+        })
+    ];
+    // Current segment is the root layout
+    if (isRootLayout) {
+        tree[4] = true;
+    }
+    return tree;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=apply-router-state-patch-to-tree.js.map
+
+
+/***/ }),
+
+/***/ 5110:
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.createHrefFromUrl = createHrefFromUrl;
+function createHrefFromUrl(url) {
+    return url.pathname + url.search + url.hash;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=create-href-from-url.js.map
+
+
+/***/ }),
+
+/***/ 7937:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.createInitialRouterState = createInitialRouterState;
+var _appRouterContext = __webpack_require__(3280);
+var _createHrefFromUrl = __webpack_require__(5110);
+function createInitialRouterState({ initialTree , children , initialCanonicalUrl , initialParallelRoutes  }) {
+    return {
+        tree: initialTree,
+        cache: {
+            status: _appRouterContext.CacheStates.READY,
+            data: null,
+            subTreeData: children,
+            parallelRoutes:  true ? new Map() : 0
+        },
+        prefetchCache: new Map(),
+        pushRef: {
+            pendingPush: false,
+            mpaNavigation: false
+        },
+        focusAndScrollRef: {
+            apply: false
+        },
+        canonicalUrl: // This is safe to do as canonicalUrl can't be rendered, it's only used to control the history updates in the useEffect further down in this file.
+         false ? 0 : initialCanonicalUrl
+    };
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=create-initial-router-state.js.map
+
+
+/***/ }),
+
+/***/ 5300:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.createOptimisticTree = createOptimisticTree;
+var _extends = (__webpack_require__(7688)/* ["default"] */ .Z);
+var _matchSegments = __webpack_require__(6197);
+function createOptimisticTree(segments, flightRouterState, parentRefetch) {
+    const [existingSegment, existingParallelRoutes] = flightRouterState || [
+        null,
+        {}
+    ];
+    const segment = segments[0];
+    const isLastSegment = segments.length === 1;
+    const segmentMatches = existingSegment !== null && (0, _matchSegments).matchSegment(existingSegment, segment);
+    const shouldRefetchThisLevel = !flightRouterState || !segmentMatches;
+    let parallelRoutes = {};
+    if (existingSegment !== null && segmentMatches) {
+        parallelRoutes = existingParallelRoutes;
+    }
+    let childTree;
+    if (!isLastSegment) {
+        const childItem = createOptimisticTree(segments.slice(1), parallelRoutes ? parallelRoutes.children : null, parentRefetch || shouldRefetchThisLevel);
+        childTree = childItem;
+    }
+    const result = [
+        segment,
+        _extends({}, parallelRoutes, childTree ? {
+            children: childTree
+        } : {})
+    ];
+    if (!parentRefetch && shouldRefetchThisLevel) {
+        result[3] = "refetch";
+    }
+    return result;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=create-optimistic-tree.js.map
+
+
+/***/ }),
+
+/***/ 9717:
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.createRecordFromThenable = createRecordFromThenable;
 function createRecordFromThenable(thenable) {
     thenable.status = "pending";
     thenable.then((value)=>{
@@ -4588,173 +4744,88 @@ function createRecordFromThenable(thenable) {
     });
     return thenable;
 }
-/**
- * Read record value or throw Promise if it's not resolved yet.
- */ function readRecordValue(thenable) {
-    // @ts-expect-error TODO: fix type
-    if (thenable.status === "fulfilled") {
-        // @ts-expect-error TODO: fix type
-        return thenable.value;
-    } else {
-        throw thenable;
-    }
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=create-record-from-thenable.js.map
+
+
+/***/ }),
+
+/***/ 9365:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchServerResponse = fetchServerResponse;
+var _async_to_generator = (__webpack_require__(4432)/* ["default"] */ .Z);
+var _client = __webpack_require__(7897);
+var _appRouterHeaders = __webpack_require__(4093);
+var _appRouter = __webpack_require__(9446);
+function fetchServerResponse(url, flightRouterState, prefetch) {
+    return _fetchServerResponse.apply(this, arguments);
 }
-function createHrefFromUrl(url) {
-    return url.pathname + url.search + url.hash;
-}
-/**
- * Invalidate cache one level down from the router state.
- */ function invalidateCacheByRouterState(newCache, existingCache, routerState) {
-    // Remove segment that we got data for so that it is filled in during rendering of subTreeData.
-    for(const key in routerState[1]){
-        const segmentForParallelRoute = routerState[1][key][0];
-        const cacheKey = Array.isArray(segmentForParallelRoute) ? segmentForParallelRoute[1] : segmentForParallelRoute;
-        const existingParallelRoutesCacheNode = existingCache.parallelRoutes.get(key);
-        if (existingParallelRoutesCacheNode) {
-            let parallelRouteCacheNode = new Map(existingParallelRoutesCacheNode);
-            parallelRouteCacheNode.delete(cacheKey);
-            newCache.parallelRoutes.set(key, parallelRouteCacheNode);
-        }
-    }
-}
-function fillLazyItemsTillLeafWithHead(newCache, existingCache, routerState, head) {
-    const isLastSegment = Object.keys(routerState[1]).length === 0;
-    if (isLastSegment) {
-        newCache.head = head;
-        return;
-    }
-    // Remove segment that we got data for so that it is filled in during rendering of subTreeData.
-    for(const key in routerState[1]){
-        const parallelRouteState = routerState[1][key];
-        const segmentForParallelRoute = parallelRouteState[0];
-        const cacheKey = Array.isArray(segmentForParallelRoute) ? segmentForParallelRoute[1] : segmentForParallelRoute;
-        if (existingCache) {
-            const existingParallelRoutesCacheNode = existingCache.parallelRoutes.get(key);
-            if (existingParallelRoutesCacheNode) {
-                let parallelRouteCacheNode = new Map(existingParallelRoutesCacheNode);
-                parallelRouteCacheNode.delete(cacheKey);
-                const newCacheNode = {
-                    status: _appRouterContext.CacheStates.LAZY_INITIALIZED,
-                    data: null,
-                    subTreeData: null,
-                    parallelRoutes: new Map()
-                };
-                parallelRouteCacheNode.set(cacheKey, newCacheNode);
-                fillLazyItemsTillLeafWithHead(newCacheNode, undefined, parallelRouteState, head);
-                newCache.parallelRoutes.set(key, parallelRouteCacheNode);
-                continue;
-            }
-        }
-        const newCacheNode = {
-            status: _appRouterContext.CacheStates.LAZY_INITIALIZED,
-            data: null,
-            subTreeData: null,
-            parallelRoutes: new Map()
+function _fetchServerResponse() {
+    _fetchServerResponse = _async_to_generator(function*(url, flightRouterState, prefetch) {
+        const headers = {
+            // Enable flight response
+            [_appRouterHeaders.RSC]: "1",
+            // Provide the current router state
+            [_appRouterHeaders.NEXT_ROUTER_STATE_TREE]: JSON.stringify(flightRouterState)
         };
-        newCache.parallelRoutes.set(key, new Map([
-            [
-                cacheKey,
-                newCacheNode
-            ]
-        ]));
-        fillLazyItemsTillLeafWithHead(newCacheNode, undefined, parallelRouteState, head);
-    }
-}
-/**
- * Fill cache with subTreeData based on flightDataPath
- */ function fillCacheWithNewSubTreeData(newCache, existingCache, flightDataPath) {
-    const isLastEntry = flightDataPath.length <= 5;
-    const [parallelRouteKey, segment] = flightDataPath;
-    const segmentForCache = Array.isArray(segment) ? segment[1] : segment;
-    const existingChildSegmentMap = existingCache.parallelRoutes.get(parallelRouteKey);
-    if (!existingChildSegmentMap) {
-        // Bailout because the existing cache does not have the path to the leaf node
-        // Will trigger lazy fetch in layout-router because of missing segment
-        return;
-    }
-    let childSegmentMap = newCache.parallelRoutes.get(parallelRouteKey);
-    if (!childSegmentMap || childSegmentMap === existingChildSegmentMap) {
-        childSegmentMap = new Map(existingChildSegmentMap);
-        newCache.parallelRoutes.set(parallelRouteKey, childSegmentMap);
-    }
-    const existingChildCacheNode = existingChildSegmentMap.get(segmentForCache);
-    let childCacheNode = childSegmentMap.get(segmentForCache);
-    if (isLastEntry) {
-        if (!childCacheNode || !childCacheNode.data || childCacheNode === existingChildCacheNode) {
-            childCacheNode = {
-                status: _appRouterContext.CacheStates.READY,
-                data: null,
-                subTreeData: flightDataPath[3],
-                // Ensure segments other than the one we got data for are preserved.
-                parallelRoutes: existingChildCacheNode ? new Map(existingChildCacheNode.parallelRoutes) : new Map()
-            };
-            if (existingChildCacheNode) {
-                invalidateCacheByRouterState(childCacheNode, existingChildCacheNode, flightDataPath[2]);
-            }
-            fillLazyItemsTillLeafWithHead(childCacheNode, existingChildCacheNode, flightDataPath[2], flightDataPath[4]);
-            childSegmentMap.set(segmentForCache, childCacheNode);
+        if (prefetch) {
+            // Enable prefetch response
+            headers[_appRouterHeaders.NEXT_ROUTER_PREFETCH] = "1";
         }
-        return;
-    }
-    if (!childCacheNode || !existingChildCacheNode) {
-        // Bailout because the existing cache does not have the path to the leaf node
-        // Will trigger lazy fetch in layout-router because of missing segment
-        return;
-    }
-    if (childCacheNode === existingChildCacheNode) {
-        childCacheNode = {
-            status: childCacheNode.status,
-            data: childCacheNode.data,
-            subTreeData: childCacheNode.subTreeData,
-            parallelRoutes: new Map(childCacheNode.parallelRoutes)
-        };
-        childSegmentMap.set(segmentForCache, childCacheNode);
-    }
-    fillCacheWithNewSubTreeData(childCacheNode, existingChildCacheNode, flightDataPath.slice(2));
+        const res = yield fetch(url.toString(), {
+            headers
+        });
+        const canonicalUrl = res.redirected ? (0, _appRouter).urlToUrlWithoutFlightMarker(res.url) : undefined;
+        const isFlightResponse = res.headers.get("content-type") === "application/octet-stream";
+        // If fetch returns something different than flight response handle it like a mpa navigation
+        if (!isFlightResponse) {
+            return [
+                res.url,
+                undefined
+            ];
+        }
+        // Handle the `fetch` readable stream that can be unwrapped by `React.use`.
+        const flightData = yield (0, _client).createFromFetch(Promise.resolve(res));
+        return [
+            flightData,
+            canonicalUrl
+        ];
+    });
+    return _fetchServerResponse.apply(this, arguments);
 }
-/**
- * Fill cache up to the end of the flightSegmentPath, invalidating anything below it.
- */ function invalidateCacheBelowFlightSegmentPath(newCache, existingCache, flightSegmentPath) {
-    const isLastEntry = flightSegmentPath.length <= 2;
-    const [parallelRouteKey, segment] = flightSegmentPath;
-    const segmentForCache = Array.isArray(segment) ? segment[1] : segment;
-    const existingChildSegmentMap = existingCache.parallelRoutes.get(parallelRouteKey);
-    if (!existingChildSegmentMap) {
-        // Bailout because the existing cache does not have the path to the leaf node
-        // Will trigger lazy fetch in layout-router because of missing segment
-        return;
-    }
-    let childSegmentMap = newCache.parallelRoutes.get(parallelRouteKey);
-    if (!childSegmentMap || childSegmentMap === existingChildSegmentMap) {
-        childSegmentMap = new Map(existingChildSegmentMap);
-        newCache.parallelRoutes.set(parallelRouteKey, childSegmentMap);
-    }
-    // In case of last entry don't copy further down.
-    if (isLastEntry) {
-        childSegmentMap.delete(segmentForCache);
-        return;
-    }
-    const existingChildCacheNode = existingChildSegmentMap.get(segmentForCache);
-    let childCacheNode = childSegmentMap.get(segmentForCache);
-    if (!childCacheNode || !existingChildCacheNode) {
-        // Bailout because the existing cache does not have the path to the leaf node
-        // Will trigger lazy fetch in layout-router because of missing segment
-        return;
-    }
-    if (childCacheNode === existingChildCacheNode) {
-        childCacheNode = {
-            status: childCacheNode.status,
-            data: childCacheNode.data,
-            subTreeData: childCacheNode.subTreeData,
-            parallelRoutes: new Map(childCacheNode.parallelRoutes)
-        };
-        childSegmentMap.set(segmentForCache, childCacheNode);
-    }
-    invalidateCacheBelowFlightSegmentPath(childCacheNode, existingChildCacheNode, flightSegmentPath.slice(2));
-}
-/**
- * Kick off fetch based on the common layout between two routes. Fill cache with data property holding the in-progress fetch.
- */ function fillCacheWithDataProperty(newCache, existingCache, segments, fetchResponse) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=fetch-server-response.js.map
+
+
+/***/ }),
+
+/***/ 7838:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fillCacheWithDataProperty = fillCacheWithDataProperty;
+var _appRouterContext = __webpack_require__(3280);
+function fillCacheWithDataProperty(newCache, existingCache, segments, fetchResponse) {
     const isLastEntry = segments.length === 1;
     const parallelRouteKey = "children";
     const [segment] = segments;
@@ -4808,95 +4879,254 @@ function fillLazyItemsTillLeafWithHead(newCache, existingCache, routerState, hea
     }
     return fillCacheWithDataProperty(childCacheNode, existingChildCacheNode, segments.slice(1), fetchResponse);
 }
-/**
- * Create optimistic version of router state based on the existing router state and segments.
- * This is used to allow rendering layout-routers up till the point where data is missing.
- */ function createOptimisticTree(segments, flightRouterState, _isFirstSegment, parentRefetch, _href) {
-    const [existingSegment, existingParallelRoutes] = flightRouterState || [
-        null,
-        {}
-    ];
-    const segment = segments[0];
-    const isLastSegment = segments.length === 1;
-    const segmentMatches = existingSegment !== null && (0, _matchSegments).matchSegment(existingSegment, segment);
-    const shouldRefetchThisLevel = !flightRouterState || !segmentMatches;
-    let parallelRoutes = {};
-    if (existingSegment !== null && segmentMatches) {
-        parallelRoutes = existingParallelRoutes;
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=fill-cache-with-data-property.js.map
+
+
+/***/ }),
+
+/***/ 4356:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fillCacheWithNewSubTreeData = fillCacheWithNewSubTreeData;
+var _appRouterContext = __webpack_require__(3280);
+var _invalidateCacheByRouterState = __webpack_require__(6808);
+var _fillLazyItemsTillLeafWithHead = __webpack_require__(5311);
+function fillCacheWithNewSubTreeData(newCache, existingCache, flightDataPath) {
+    const isLastEntry = flightDataPath.length <= 5;
+    const [parallelRouteKey, segment] = flightDataPath;
+    const segmentForCache = Array.isArray(segment) ? segment[1] : segment;
+    const existingChildSegmentMap = existingCache.parallelRoutes.get(parallelRouteKey);
+    if (!existingChildSegmentMap) {
+        // Bailout because the existing cache does not have the path to the leaf node
+        // Will trigger lazy fetch in layout-router because of missing segment
+        return;
     }
-    let childTree;
-    if (!isLastSegment) {
-        const childItem = createOptimisticTree(segments.slice(1), parallelRoutes ? parallelRoutes.children : null, false, parentRefetch || shouldRefetchThisLevel);
-        childTree = childItem;
+    let childSegmentMap = newCache.parallelRoutes.get(parallelRouteKey);
+    if (!childSegmentMap || childSegmentMap === existingChildSegmentMap) {
+        childSegmentMap = new Map(existingChildSegmentMap);
+        newCache.parallelRoutes.set(parallelRouteKey, childSegmentMap);
     }
-    const result = [
-        segment,
-        _extends({}, parallelRoutes, childTree ? {
-            children: childTree
-        } : {})
-    ];
-    if (!parentRefetch && shouldRefetchThisLevel) {
-        result[3] = "refetch";
+    const existingChildCacheNode = existingChildSegmentMap.get(segmentForCache);
+    let childCacheNode = childSegmentMap.get(segmentForCache);
+    if (isLastEntry) {
+        if (!childCacheNode || !childCacheNode.data || childCacheNode === existingChildCacheNode) {
+            childCacheNode = {
+                status: _appRouterContext.CacheStates.READY,
+                data: null,
+                subTreeData: flightDataPath[3],
+                // Ensure segments other than the one we got data for are preserved.
+                parallelRoutes: existingChildCacheNode ? new Map(existingChildCacheNode.parallelRoutes) : new Map()
+            };
+            if (existingChildCacheNode) {
+                (0, _invalidateCacheByRouterState).invalidateCacheByRouterState(childCacheNode, existingChildCacheNode, flightDataPath[2]);
+            }
+            (0, _fillLazyItemsTillLeafWithHead).fillLazyItemsTillLeafWithHead(childCacheNode, existingChildCacheNode, flightDataPath[2], flightDataPath[4]);
+            childSegmentMap.set(segmentForCache, childCacheNode);
+        }
+        return;
     }
-    return result;
+    if (!childCacheNode || !existingChildCacheNode) {
+        // Bailout because the existing cache does not have the path to the leaf node
+        // Will trigger lazy fetch in layout-router because of missing segment
+        return;
+    }
+    if (childCacheNode === existingChildCacheNode) {
+        childCacheNode = {
+            status: childCacheNode.status,
+            data: childCacheNode.data,
+            subTreeData: childCacheNode.subTreeData,
+            parallelRoutes: new Map(childCacheNode.parallelRoutes)
+        };
+        childSegmentMap.set(segmentForCache, childCacheNode);
+    }
+    fillCacheWithNewSubTreeData(childCacheNode, existingChildCacheNode, flightDataPath.slice(2));
 }
-/**
- * Apply the router state from the Flight response. Creates a new router state tree.
- */ function applyRouterStatePatchToTree(flightSegmentPath, flightRouterState, treePatch) {
-    const [segment, parallelRoutes, , , isRootLayout] = flightRouterState;
-    // Root refresh
-    if (flightSegmentPath.length === 1) {
-        const tree = [
-            ...treePatch
-        ];
-        return tree;
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=fill-cache-with-new-subtree-data.js.map
+
+
+/***/ }),
+
+/***/ 5311:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fillLazyItemsTillLeafWithHead = fillLazyItemsTillLeafWithHead;
+var _appRouterContext = __webpack_require__(3280);
+function fillLazyItemsTillLeafWithHead(newCache, existingCache, routerState, head) {
+    const isLastSegment = Object.keys(routerState[1]).length === 0;
+    if (isLastSegment) {
+        newCache.head = head;
+        return;
     }
-    const [currentSegment, parallelRouteKey] = flightSegmentPath;
-    // Tree path returned from the server should always match up with the current tree in the browser
-    if (!(0, _matchSegments).matchSegment(currentSegment, segment)) {
-        return null;
+    // Remove segment that we got data for so that it is filled in during rendering of subTreeData.
+    for(const key in routerState[1]){
+        const parallelRouteState = routerState[1][key];
+        const segmentForParallelRoute = parallelRouteState[0];
+        const cacheKey = Array.isArray(segmentForParallelRoute) ? segmentForParallelRoute[1] : segmentForParallelRoute;
+        if (existingCache) {
+            const existingParallelRoutesCacheNode = existingCache.parallelRoutes.get(key);
+            if (existingParallelRoutesCacheNode) {
+                let parallelRouteCacheNode = new Map(existingParallelRoutesCacheNode);
+                parallelRouteCacheNode.delete(cacheKey);
+                const newCacheNode = {
+                    status: _appRouterContext.CacheStates.LAZY_INITIALIZED,
+                    data: null,
+                    subTreeData: null,
+                    parallelRoutes: new Map()
+                };
+                parallelRouteCacheNode.set(cacheKey, newCacheNode);
+                fillLazyItemsTillLeafWithHead(newCacheNode, undefined, parallelRouteState, head);
+                newCache.parallelRoutes.set(key, parallelRouteCacheNode);
+                continue;
+            }
+        }
+        const newCacheNode = {
+            status: _appRouterContext.CacheStates.LAZY_INITIALIZED,
+            data: null,
+            subTreeData: null,
+            parallelRoutes: new Map()
+        };
+        newCache.parallelRoutes.set(key, new Map([
+            [
+                cacheKey,
+                newCacheNode
+            ]
+        ]));
+        fillLazyItemsTillLeafWithHead(newCacheNode, undefined, parallelRouteState, head);
     }
-    const lastSegment = flightSegmentPath.length === 2;
-    let parallelRoutePatch;
-    if (lastSegment) {
-        parallelRoutePatch = treePatch;
-    } else {
-        parallelRoutePatch = applyRouterStatePatchToTree(flightSegmentPath.slice(2), parallelRoutes[parallelRouteKey], treePatch);
-        if (parallelRoutePatch === null) {
-            return null;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=fill-lazy-items-till-leaf-with-head.js.map
+
+
+/***/ }),
+
+/***/ 6256:
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.invalidateCacheBelowFlightSegmentPath = invalidateCacheBelowFlightSegmentPath;
+function invalidateCacheBelowFlightSegmentPath(newCache, existingCache, flightSegmentPath) {
+    const isLastEntry = flightSegmentPath.length <= 2;
+    const [parallelRouteKey, segment] = flightSegmentPath;
+    const segmentForCache = Array.isArray(segment) ? segment[1] : segment;
+    const existingChildSegmentMap = existingCache.parallelRoutes.get(parallelRouteKey);
+    if (!existingChildSegmentMap) {
+        // Bailout because the existing cache does not have the path to the leaf node
+        // Will trigger lazy fetch in layout-router because of missing segment
+        return;
+    }
+    let childSegmentMap = newCache.parallelRoutes.get(parallelRouteKey);
+    if (!childSegmentMap || childSegmentMap === existingChildSegmentMap) {
+        childSegmentMap = new Map(existingChildSegmentMap);
+        newCache.parallelRoutes.set(parallelRouteKey, childSegmentMap);
+    }
+    // In case of last entry don't copy further down.
+    if (isLastEntry) {
+        childSegmentMap.delete(segmentForCache);
+        return;
+    }
+    const existingChildCacheNode = existingChildSegmentMap.get(segmentForCache);
+    let childCacheNode = childSegmentMap.get(segmentForCache);
+    if (!childCacheNode || !existingChildCacheNode) {
+        // Bailout because the existing cache does not have the path to the leaf node
+        // Will trigger lazy fetch in layout-router because of missing segment
+        return;
+    }
+    if (childCacheNode === existingChildCacheNode) {
+        childCacheNode = {
+            status: childCacheNode.status,
+            data: childCacheNode.data,
+            subTreeData: childCacheNode.subTreeData,
+            parallelRoutes: new Map(childCacheNode.parallelRoutes)
+        };
+        childSegmentMap.set(segmentForCache, childCacheNode);
+    }
+    invalidateCacheBelowFlightSegmentPath(childCacheNode, existingChildCacheNode, flightSegmentPath.slice(2));
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=invalidate-cache-below-flight-segmentpath.js.map
+
+
+/***/ }),
+
+/***/ 6808:
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.invalidateCacheByRouterState = invalidateCacheByRouterState;
+function invalidateCacheByRouterState(newCache, existingCache, routerState) {
+    // Remove segment that we got data for so that it is filled in during rendering of subTreeData.
+    for(const key in routerState[1]){
+        const segmentForParallelRoute = routerState[1][key][0];
+        const cacheKey = Array.isArray(segmentForParallelRoute) ? segmentForParallelRoute[1] : segmentForParallelRoute;
+        const existingParallelRoutesCacheNode = existingCache.parallelRoutes.get(key);
+        if (existingParallelRoutesCacheNode) {
+            let parallelRouteCacheNode = new Map(existingParallelRoutesCacheNode);
+            parallelRouteCacheNode.delete(cacheKey);
+            newCache.parallelRoutes.set(key, parallelRouteCacheNode);
         }
     }
-    const tree = [
-        flightSegmentPath[0],
-        _extends({}, parallelRoutes, {
-            [parallelRouteKey]: parallelRoutePatch
-        })
-    ];
-    // Current segment is the root layout
-    if (isRootLayout) {
-        tree[4] = true;
-    }
-    return tree;
 }
-function shouldHardNavigate(flightSegmentPath, flightRouterState, treePatch) {
-    const [segment, parallelRoutes] = flightRouterState;
-    // TODO-APP: Check if `as` can be replaced.
-    const [currentSegment, parallelRouteKey] = flightSegmentPath;
-    // Check if current segment matches the existing segment.
-    if (!(0, _matchSegments).matchSegment(currentSegment, segment)) {
-        // If dynamic parameter in tree doesn't match up with segment path a hard navigation is triggered.
-        if (Array.isArray(currentSegment)) {
-            return true;
-        }
-        // If the existing segment did not match soft navigation is triggered.
-        return false;
-    }
-    const lastSegment = flightSegmentPath.length <= 2;
-    if (lastSegment) {
-        return false;
-    }
-    return shouldHardNavigate(flightSegmentPath.slice(2), parallelRoutes[parallelRouteKey], treePatch);
-}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=invalidate-cache-by-router-state.js.map
+
+
+/***/ }),
+
+/***/ 1090:
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.isNavigatingToNewRootLayout = isNavigatingToNewRootLayout;
 function isNavigatingToNewRootLayout(currentTree, nextTree) {
     // Compare segments
     const currentTreeSegment = currentTree[0];
@@ -4930,6 +5160,68 @@ function isNavigatingToNewRootLayout(currentTree, nextTree) {
     if (!currentTreeChild || !nextTreeChild) return true;
     return isNavigatingToNewRootLayout(currentTreeChild, nextTreeChild);
 }
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=is-navigating-to-new-root-layout.js.map
+
+
+/***/ }),
+
+/***/ 12:
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.readRecordValue = readRecordValue;
+function readRecordValue(thenable) {
+    // @ts-expect-error TODO: fix type
+    if (thenable.status === "fulfilled") {
+        // @ts-expect-error TODO: fix type
+        return thenable.value;
+    } else {
+        throw thenable;
+    }
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=read-record-value.js.map
+
+
+/***/ }),
+
+/***/ 3233:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.reducer = exports.ACTION_PREFETCH = exports.ACTION_SERVER_PATCH = exports.ACTION_RESTORE = exports.ACTION_NAVIGATE = exports.ACTION_REFRESH = void 0;
+var _appRouterContext = __webpack_require__(3280);
+var _fetchServerResponse = __webpack_require__(9365);
+var _createRecordFromThenable = __webpack_require__(9717);
+var _readRecordValue = __webpack_require__(12);
+var _createHrefFromUrl = __webpack_require__(5110);
+var _fillLazyItemsTillLeafWithHead = __webpack_require__(5311);
+var _fillCacheWithNewSubtreeData = __webpack_require__(4356);
+var _invalidateCacheBelowFlightSegmentpath = __webpack_require__(6256);
+var _fillCacheWithDataProperty = __webpack_require__(7838);
+var _createOptimisticTree = __webpack_require__(5300);
+var _applyRouterStatePatchToTree = __webpack_require__(9705);
+var _shouldHardNavigate = __webpack_require__(5460);
+var _isNavigatingToNewRootLayout = __webpack_require__(1090);
 const ACTION_REFRESH = "refresh";
 exports.ACTION_REFRESH = ACTION_REFRESH;
 const ACTION_NAVIGATE = "navigate";
@@ -4948,7 +5240,7 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
             {
                 const { url , navigateType , cache , mutable , forceOptimisticNavigation  } = action;
                 const { pathname , search  } = url;
-                const href = createHrefFromUrl(url);
+                const href = (0, _createHrefFromUrl).createHrefFromUrl(url);
                 const pendingPush = navigateType === "push";
                 const isForCurrentTree = JSON.stringify(mutable.previousTree) === JSON.stringify(state.tree);
                 if (mutable.mpaNavigation && isForCurrentTree) {
@@ -5015,15 +5307,15 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                     if (newTree !== null) {
                         mutable.previousTree = state.tree;
                         mutable.patchedTree = newTree;
-                        mutable.mpaNavigation = isNavigatingToNewRootLayout(state.tree, newTree);
+                        mutable.mpaNavigation = (0, _isNavigatingToNewRootLayout).isNavigatingToNewRootLayout(state.tree, newTree);
                         if (newTree === null) {
                             throw new Error("SEGMENT MISMATCH");
                         }
-                        const canonicalUrlOverrideHrefVal = canonicalUrlOverride ? createHrefFromUrl(canonicalUrlOverride) : undefined;
+                        const canonicalUrlOverrideHrefVal = canonicalUrlOverride ? (0, _createHrefFromUrl).createHrefFromUrl(canonicalUrlOverride) : undefined;
                         if (canonicalUrlOverrideHrefVal) {
                             mutable.canonicalUrlOverride = canonicalUrlOverrideHrefVal;
                         }
-                        mutable.mpaNavigation = isNavigatingToNewRootLayout(state.tree, newTree);
+                        mutable.mpaNavigation = (0, _isNavigatingToNewRootLayout).isNavigatingToNewRootLayout(state.tree, newTree);
                         // TODO-APP: Currently the Flight data can only have one item but in the future it can have multiple paths.
                         const flightDataPath = flightData[0];
                         const flightSegmentPath = flightDataPath.slice(0, -3);
@@ -5034,29 +5326,30 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                             if (flightDataPath.length === 3) {
                                 cache.status = _appRouterContext.CacheStates.READY;
                                 cache.subTreeData = subTreeData;
-                                fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
+                                cache.parallelRoutes = new Map();
+                                (0, _fillLazyItemsTillLeafWithHead).fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
                             } else {
                                 cache.status = _appRouterContext.CacheStates.READY;
                                 // Copy subTreeData for the root node of the cache.
                                 cache.subTreeData = state.cache.subTreeData;
                                 // Create a copy of the existing cache with the subTreeData applied.
-                                fillCacheWithNewSubTreeData(cache, state.cache, flightDataPath);
+                                (0, _fillCacheWithNewSubtreeData).fillCacheWithNewSubTreeData(cache, state.cache, flightDataPath);
                             }
                         }
-                        const hardNavigate = search !== location.search || shouldHardNavigate([
+                        const hardNavigate = search !== location.search || (0, _shouldHardNavigate).shouldHardNavigate([
                             "",
                             ...flightSegmentPath
-                        ], state.tree, newTree);
+                        ], state.tree);
                         if (hardNavigate) {
                             cache.status = _appRouterContext.CacheStates.READY;
                             // Copy subTreeData for the root node of the cache.
                             cache.subTreeData = state.cache.subTreeData;
-                            invalidateCacheBelowFlightSegmentPath(cache, state.cache, flightSegmentPath);
+                            (0, _invalidateCacheBelowFlightSegmentpath).invalidateCacheBelowFlightSegmentPath(cache, state.cache, flightSegmentPath);
                         // Ensure the existing cache value is used when the cache was not invalidated.
                         } else if (subTreeData === null) {
                             mutable.useExistingCache = true;
                         }
-                        const canonicalUrlOverrideHref = canonicalUrlOverride ? createHrefFromUrl(canonicalUrlOverride) : undefined;
+                        const canonicalUrlOverrideHref = canonicalUrlOverride ? (0, _createHrefFromUrl).createHrefFromUrl(canonicalUrlOverride) : undefined;
                         if (canonicalUrlOverrideHref) {
                             mutable.canonicalUrlOverride = canonicalUrlOverrideHref;
                         }
@@ -5090,18 +5383,18 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                     segments.push("");
                     // Optimistic tree case.
                     // If the optimistic tree is deeper than the current state leave that deeper part out of the fetch
-                    const optimisticTree = createOptimisticTree(segments, state.tree, true, false, href);
+                    const optimisticTree = (0, _createOptimisticTree).createOptimisticTree(segments, state.tree, false);
                     // Copy subTreeData for the root node of the cache.
                     cache.status = _appRouterContext.CacheStates.READY;
                     cache.subTreeData = state.cache.subTreeData;
                     // Copy existing cache nodes as far as possible and fill in `data` property with the started data fetch.
                     // The `data` property is used to suspend in layout-router during render if it hasn't resolved yet by the time it renders.
-                    const res = fillCacheWithDataProperty(cache, state.cache, segments.slice(1), ()=>(0, _appRouter).fetchServerResponse(url, optimisticTree));
+                    const res = (0, _fillCacheWithDataProperty).fillCacheWithDataProperty(cache, state.cache, segments.slice(1), ()=>(0, _fetchServerResponse).fetchServerResponse(url, optimisticTree));
                     // If optimistic fetch couldn't happen it falls back to the non-optimistic case.
                     if (!(res == null ? void 0 : res.bailOptimistic)) {
                         mutable.previousTree = state.tree;
                         mutable.patchedTree = optimisticTree;
-                        mutable.mpaNavigation = isNavigatingToNewRootLayout(state.tree, optimisticTree);
+                        mutable.mpaNavigation = (0, _isNavigatingToNewRootLayout).isNavigatingToNewRootLayout(state.tree, optimisticTree);
                         return {
                             // Set href.
                             canonicalUrl: href,
@@ -5125,10 +5418,10 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                 // Below is the not-optimistic case. Data is fetched at the root and suspended there without a suspense boundary.
                 // If no in-flight fetch at the top, start it.
                 if (!cache.data) {
-                    cache.data = createRecordFromThenable((0, _appRouter).fetchServerResponse(url, state.tree));
+                    cache.data = (0, _createRecordFromThenable).createRecordFromThenable((0, _fetchServerResponse).fetchServerResponse(url, state.tree));
                 }
                 // Unwrap cache data with `use` to suspend here (in the reducer) until the fetch resolves.
-                const [flightData, canonicalUrlOverride] = readRecordValue(cache.data);
+                const [flightData, canonicalUrlOverride] = (0, _readRecordValue).readRecordValue(cache.data);
                 // Handle case when navigating to page in `pages` from `app`
                 if (typeof flightData === "string") {
                     return {
@@ -5156,30 +5449,30 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                 // Path without the last segment, router state, and the subTreeData
                 const flightSegmentPath = flightDataPath.slice(0, -4);
                 // Create new tree based on the flightSegmentPath and router state patch
-                const newTree = applyRouterStatePatchToTree([
+                const newTree = (0, _applyRouterStatePatchToTree).applyRouterStatePatchToTree([
                     "",
                     ...flightSegmentPath
                 ], state.tree, treePatch);
                 if (newTree === null) {
                     throw new Error("SEGMENT MISMATCH");
                 }
-                const canonicalUrlOverrideHref = canonicalUrlOverride ? createHrefFromUrl(canonicalUrlOverride) : undefined;
+                const canonicalUrlOverrideHref = canonicalUrlOverride ? (0, _createHrefFromUrl).createHrefFromUrl(canonicalUrlOverride) : undefined;
                 if (canonicalUrlOverrideHref) {
                     mutable.canonicalUrlOverride = canonicalUrlOverrideHref;
                 }
                 mutable.previousTree = state.tree;
                 mutable.patchedTree = newTree;
-                mutable.mpaNavigation = isNavigatingToNewRootLayout(state.tree, newTree);
+                mutable.mpaNavigation = (0, _isNavigatingToNewRootLayout).isNavigatingToNewRootLayout(state.tree, newTree);
                 if (flightDataPath.length === 3) {
                     cache.status = _appRouterContext.CacheStates.READY;
                     cache.subTreeData = subTreeData;
-                    fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
+                    (0, _fillLazyItemsTillLeafWithHead).fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
                 } else {
                     // Copy subTreeData for the root node of the cache.
                     cache.status = _appRouterContext.CacheStates.READY;
                     cache.subTreeData = state.cache.subTreeData;
                     // Create a copy of the existing cache with the subTreeData applied.
-                    fillCacheWithNewSubTreeData(cache, state.cache, flightDataPath);
+                    (0, _fillCacheWithNewSubtreeData).fillCacheWithNewSubTreeData(cache, state.cache, flightDataPath);
                 }
                 return {
                     // Set href.
@@ -5272,29 +5565,29 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                 // Slices off the last segment (which is at -4) as it doesn't exist in the tree yet
                 const flightSegmentPath = flightDataPath.slice(0, -4);
                 const [treePatch, subTreeData, head] = flightDataPath.slice(-3);
-                const newTree = applyRouterStatePatchToTree([
+                const newTree = (0, _applyRouterStatePatchToTree).applyRouterStatePatchToTree([
                     "",
                     ...flightSegmentPath
                 ], state.tree, treePatch);
                 if (newTree === null) {
                     throw new Error("SEGMENT MISMATCH");
                 }
-                const canonicalUrlOverrideHref = overrideCanonicalUrl ? createHrefFromUrl(overrideCanonicalUrl) : undefined;
+                const canonicalUrlOverrideHref = overrideCanonicalUrl ? (0, _createHrefFromUrl).createHrefFromUrl(overrideCanonicalUrl) : undefined;
                 if (canonicalUrlOverrideHref) {
                     mutable.canonicalUrlOverride = canonicalUrlOverrideHref;
                 }
                 mutable.patchedTree = newTree;
-                mutable.mpaNavigation = isNavigatingToNewRootLayout(state.tree, newTree);
+                mutable.mpaNavigation = (0, _isNavigatingToNewRootLayout).isNavigatingToNewRootLayout(state.tree, newTree);
                 // Root refresh
                 if (flightDataPath.length === 3) {
                     cache.status = _appRouterContext.CacheStates.READY;
                     cache.subTreeData = subTreeData;
-                    fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
+                    (0, _fillLazyItemsTillLeafWithHead).fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
                 } else {
                     // Copy subTreeData for the root node of the cache.
                     cache.status = _appRouterContext.CacheStates.READY;
                     cache.subTreeData = state.cache.subTreeData;
-                    fillCacheWithNewSubTreeData(cache, state.cache, flightDataPath);
+                    (0, _fillCacheWithNewSubtreeData).fillCacheWithNewSubTreeData(cache, state.cache, flightDataPath);
                 }
                 return {
                     // Keep href as it was set during navigate / restore
@@ -5313,7 +5606,7 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
         case ACTION_RESTORE:
             {
                 const { url , tree  } = action;
-                const href = createHrefFromUrl(url);
+                const href = (0, _createHrefFromUrl).createHrefFromUrl(url);
                 return {
                     // Set canonical url
                     canonicalUrl: href,
@@ -5325,8 +5618,6 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                     tree: tree
                 };
             }
-        // TODO-APP: Add test for not scrolling to nearest layout when calling refresh.
-        // TODO-APP: Add test for startTransition(() => {router.push('/'); router.refresh();}), that case should scroll.
         case ACTION_REFRESH:
             {
                 const { cache , mutable  } = action;
@@ -5371,14 +5662,14 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                 }
                 if (!cache.data) {
                     // Fetch data from the root of the tree.
-                    cache.data = createRecordFromThenable((0, _appRouter).fetchServerResponse(new URL(href, location.origin), [
+                    cache.data = (0, _createRecordFromThenable).createRecordFromThenable((0, _fetchServerResponse).fetchServerResponse(new URL(href, location.origin), [
                         state.tree[0],
                         state.tree[1],
                         state.tree[2],
                         "refetch"
                     ]));
                 }
-                const [flightData, canonicalUrlOverride] = readRecordValue(cache.data);
+                const [flightData, canonicalUrlOverride] = (0, _readRecordValue).readRecordValue(cache.data);
                 // Handle case when navigating to page in `pages` from `app`
                 if (typeof flightData === "string") {
                     return {
@@ -5407,23 +5698,23 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                 }
                 // Given the path can only have two items the items are only the router state and subTreeData for the root.
                 const [treePatch, subTreeData, head] = flightDataPath;
-                const newTree = applyRouterStatePatchToTree([
+                const newTree = (0, _applyRouterStatePatchToTree).applyRouterStatePatchToTree([
                     ""
                 ], state.tree, treePatch);
                 if (newTree === null) {
                     throw new Error("SEGMENT MISMATCH");
                 }
-                const canonicalUrlOverrideHref = canonicalUrlOverride ? createHrefFromUrl(canonicalUrlOverride) : undefined;
+                const canonicalUrlOverrideHref = canonicalUrlOverride ? (0, _createHrefFromUrl).createHrefFromUrl(canonicalUrlOverride) : undefined;
                 if (canonicalUrlOverride) {
                     mutable.canonicalUrlOverride = canonicalUrlOverrideHref;
                 }
                 mutable.previousTree = state.tree;
                 mutable.patchedTree = newTree;
-                mutable.mpaNavigation = isNavigatingToNewRootLayout(state.tree, newTree);
+                mutable.mpaNavigation = (0, _isNavigatingToNewRootLayout).isNavigatingToNewRootLayout(state.tree, newTree);
                 // Set subTreeData for the root node of the cache.
                 cache.status = _appRouterContext.CacheStates.READY;
                 cache.subTreeData = subTreeData;
-                fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
+                (0, _fillLazyItemsTillLeafWithHead).fillLazyItemsTillLeafWithHead(cache, state.cache, treePatch, head);
                 return {
                     // Set href, this doesn't reuse the state.canonicalUrl as because of concurrent rendering the href might change between dispatching and applying.
                     canonicalUrl: canonicalUrlOverrideHref ? canonicalUrlOverrideHref : href,
@@ -5447,13 +5738,13 @@ exports.ACTION_PREFETCH = ACTION_PREFETCH;
                 if (typeof flightData === "string") {
                     return state;
                 }
-                const href = createHrefFromUrl(url);
+                const href = (0, _createHrefFromUrl).createHrefFromUrl(url);
                 // TODO-APP: Currently the Flight data can only have one item but in the future it can have multiple paths.
                 const flightDataPath = flightData[0];
                 // The one before last item is the router state tree patch
                 const [treePatch] = flightDataPath.slice(-3);
                 const flightSegmentPath = flightDataPath.slice(0, -3);
-                const newTree = applyRouterStatePatchToTree([
+                const newTree = (0, _applyRouterStatePatchToTree).applyRouterStatePatchToTree([
                     "",
                     ...flightSegmentPath
                 ], state.tree, treePatch);
@@ -5486,12 +5777,12 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
     });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
-} //# sourceMappingURL=reducer.js.map
+} //# sourceMappingURL=router-reducer.js.map
 
 
 /***/ }),
 
-/***/ 6862:
+/***/ 5460:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -5499,13 +5790,26 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
-exports["default"] = RenderFromTemplateContext;
-var _interop_require_wildcard = (__webpack_require__(1644)/* ["default"] */ .Z);
-var _react = _interop_require_wildcard(__webpack_require__(8038));
-var _appRouterContext = __webpack_require__(3280);
-function RenderFromTemplateContext() {
-    const children = (0, _react).useContext(_appRouterContext.TemplateContext);
-    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, children);
+exports.shouldHardNavigate = shouldHardNavigate;
+var _matchSegments = __webpack_require__(6197);
+function shouldHardNavigate(flightSegmentPath, flightRouterState) {
+    const [segment, parallelRoutes] = flightRouterState;
+    // TODO-APP: Check if `as` can be replaced.
+    const [currentSegment, parallelRouteKey] = flightSegmentPath;
+    // Check if current segment matches the existing segment.
+    if (!(0, _matchSegments).matchSegment(currentSegment, segment)) {
+        // If dynamic parameter in tree doesn't match up with segment path a hard navigation is triggered.
+        if (Array.isArray(currentSegment)) {
+            return true;
+        }
+        // If the existing segment did not match soft navigation is triggered.
+        return false;
+    }
+    const lastSegment = flightSegmentPath.length <= 2;
+    if (lastSegment) {
+        return false;
+    }
+    return shouldHardNavigate(flightSegmentPath.slice(2), parallelRoutes[parallelRouteKey]);
 }
 if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
     Object.defineProperty(exports.default, "__esModule", {
@@ -5513,7 +5817,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
     });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
-} //# sourceMappingURL=render-from-template-context.js.map
+} //# sourceMappingURL=should-hard-navigate.js.map
 
 
 /***/ }),
@@ -7436,10 +7740,14 @@ function observe(element, callback, options) {
 function useIntersection({ rootRef , rootMargin , disabled  }) {
     const isDisabled = disabled || !hasIntersectionObserver;
     const [visible, setVisible] = (0, _react).useState(false);
-    const [element, setElement] = (0, _react).useState(null);
+    const elementRef = (0, _react).useRef(null);
+    const setElement = (0, _react).useCallback((element)=>{
+        elementRef.current = element;
+    }, []);
     (0, _react).useEffect(()=>{
         if (hasIntersectionObserver) {
             if (isDisabled || visible) return;
+            const element = elementRef.current;
             if (element && element.tagName) {
                 const unobserve = observe(element, (isVisible)=>isVisible && setVisible(isVisible), {
                     root: rootRef == null ? void 0 : rootRef.current,
@@ -7453,12 +7761,13 @@ function useIntersection({ rootRef , rootMargin , disabled  }) {
                 return ()=>(0, _requestIdleCallback).cancelIdleCallback(idleCallback);
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-        element,
         isDisabled,
         rootMargin,
         rootRef,
-        visible
+        visible,
+        elementRef.current
     ]);
     const resetVisible = (0, _react).useCallback(()=>{
         setVisible(false);
@@ -7684,6 +7993,7 @@ exports.matchesMiddleware = matchesMiddleware;
 exports.isLocalURL = isLocalURL;
 exports.interpolateAs = interpolateAs;
 exports.resolveHref = resolveHref;
+exports.handleSmoothScroll = handleSmoothScroll;
 exports.createKey = createKey;
 exports["default"] = void 0;
 var _async_to_generator = (__webpack_require__(4432)/* ["default"] */ .Z);
@@ -7703,7 +8013,7 @@ var _isDynamic = __webpack_require__(1428);
 var _parseRelativeUrl = __webpack_require__(1292);
 var _querystring = __webpack_require__(979);
 var _resolveRewrites = _interop_require_default(__webpack_require__(6052));
-var _routeMatcher = __webpack_require__(4226);
+var _routeMatcher = __webpack_require__(1224);
 var _routeRegex = __webpack_require__(5052);
 var _formatUrl = __webpack_require__(3938);
 var _detectDomainLocale = __webpack_require__(9447);
@@ -8034,14 +8344,16 @@ function fetchRetry(url, attempts, options) {
         return !response.ok && attempts > 1 && response.status >= 500 ? fetchRetry(url, attempts - 1, options) : response;
     });
 }
-function handleSmoothScroll(fn) {
+function handleSmoothScroll(fn, options = {}) {
     const htmlElement = document.documentElement;
     const existing = htmlElement.style.scrollBehavior;
     htmlElement.style.scrollBehavior = "auto";
-    // In Chrome-based browsers we need to force reflow before calling `scrollTo`.
-    // Otherwise it will not pickup the change in scrollBehavior
-    // More info here: https://github.com/vercel/next.js/issues/40719#issuecomment-1336248042
-    htmlElement.getClientRects();
+    if (!options.dontForceLayout) {
+        // In Chrome-based browsers we need to force reflow before calling `scrollTo`.
+        // Otherwise it will not pickup the change in scrollBehavior
+        // More info here: https://github.com/vercel/next.js/issues/40719#issuecomment-1336248042
+        htmlElement.getClientRects();
+    }
     fn();
     htmlElement.style.scrollBehavior = existing;
 }
@@ -8135,7 +8447,9 @@ function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware ,
             if (!unstable_skipClientCache) {
                 delete inflightCache[cacheKey];
             }
-            if (err.message === "Failed to fetch") {
+            if (err.message === "Failed to fetch" || // firefox
+            err.message === "NetworkError when attempting to fetch resource." || // safari
+            err.message === "Load failed") {
                 (0, _routeLoader).markAssetError(err);
             }
             throw err;

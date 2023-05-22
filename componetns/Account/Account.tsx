@@ -1,10 +1,10 @@
 'use client';
 
-import axios from 'axios';
-import classNames from 'classnames';
-import { getSession, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
+import { getSession, useSession } from 'next-auth/react';
+import avatarHandler from '../../helpers/avatarHandler';
 import handleCancelImageClick from '../../helpers/handleCancelImageClick';
 import handleFileChanged from '../../helpers/handleFileChange';
 import { onChangePassword } from '../../helpers/passwordChange';
@@ -55,20 +55,20 @@ export default function Account({ avatar }: Props) {
     }
   }
 
-  async function avatarHandler(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  // async function avatarHandler(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
 
-    const avatarData = {
-      avatar: imageUrl,
-    };
+  //   const avatarData = {
+  //     avatar: imageUrl,
+  //   };
 
-    try {
-      await axios.post('/api/user/uploadAvatar', avatarData);
-      setIsAvatarImageForm(false);
-    } catch (error) {
-      console.log('uploading avatar failed');
-    }
-  }
+  //   try {
+  //     await axios.post('/api/user/uploadAvatar', avatarData);
+  //     setIsAvatarImageForm(false);
+  //   } catch (error) {
+  //     console.log('uploading avatar failed');
+  //   }
+  // }
 
   function handleFile(event: React.ChangeEvent<HTMLInputElement>) {
     handleFileChanged(event, setUploadProgress, setImageUrl, setFileInputRef);
@@ -194,7 +194,10 @@ export default function Account({ avatar }: Props) {
             <div className="columns is-centered">
               <div className="column is-half">
                 <div className="box">
-                  <form onSubmit={avatarHandler}>
+                  <form onSubmit={(e) => {
+                    avatarHandler(e, imageUrl, setIsAvatarImageForm);
+                  }}
+                  >
                     <div className="file is-dark mb-2">
                       <label htmlFor="file" className="file-label">
                         <input

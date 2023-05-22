@@ -4467,10 +4467,11 @@ function staticGenerationBailout(reason) {
         return true;
     }
     if (staticGenerationStore == null ? void 0 : staticGenerationStore.isStaticGeneration) {
-        if (staticGenerationStore) {
-            staticGenerationStore.fetchRevalidate = 0;
-        }
-        throw new _hooksServerContext.DynamicServerError(reason);
+        staticGenerationStore.revalidate = 0;
+        const err = new _hooksServerContext.DynamicServerError(reason);
+        staticGenerationStore.dynamicUsageDescription = reason;
+        staticGenerationStore.dynamicUsageStack = err.stack;
+        throw err;
     }
     return false;
 }
@@ -6425,7 +6426,7 @@ const now = __webpack_require__(3443);
 const { random  } = __webpack_require__(8283);
 const request = __webpack_require__(428);
 const { CLOCK_TOLERANCE  } = __webpack_require__(289);
-const { keystores  } = __webpack_require__(2128);
+const { keystores  } = __webpack_require__(4226);
 const KeyStore = __webpack_require__(4415);
 const clone = __webpack_require__(9494);
 const { authenticatedPost , resolveResponseType , resolveRedirectUri  } = __webpack_require__(8418);
@@ -8256,7 +8257,7 @@ const { assertIssuerConfiguration  } = __webpack_require__(5375);
 const { random  } = __webpack_require__(8283);
 const now = __webpack_require__(3443);
 const request = __webpack_require__(428);
-const { keystores  } = __webpack_require__(2128);
+const { keystores  } = __webpack_require__(4226);
 const merge = __webpack_require__(575);
 const formUrlEncode = (value)=>encodeURIComponent(value).replace(/%20/g, "+");
 async function clientAssertion(endpoint, payload) {
@@ -8572,7 +8573,7 @@ const LRU = __webpack_require__(630);
 const { RPError  } = __webpack_require__(7929);
 const { assertIssuerConfiguration  } = __webpack_require__(5375);
 const KeyStore = __webpack_require__(4415);
-const { keystores  } = __webpack_require__(2128);
+const { keystores  } = __webpack_require__(4226);
 const processResponse = __webpack_require__(5);
 const request = __webpack_require__(428);
 const inFlight = new WeakMap();
@@ -9258,7 +9259,7 @@ module.exports = ()=>Math.floor(Date.now() / 1000);
 
 /***/ }),
 
-/***/ 2128:
+/***/ 4226:
 /***/ ((module) => {
 
 "use strict";

@@ -1,9 +1,9 @@
 {
-  "/auth/page": "app/auth/page.js",
   "/account/page": "app/account/page.js",
-  "/newpost/page": "app/newpost/page.js",
-  "/posts/[slug]/page": "app/posts/[slug]/page.js",
+  "/auth/page": "app/auth/page.js",
   "/contacts/page": "app/contacts/page.js",
   "/page": "app/page.js",
+  "/newpost/page": "app/newpost/page.js",
+  "/posts/[slug]/page": "app/posts/[slug]/page.js",
   "/posts/page": "app/posts/page.js"
 }
