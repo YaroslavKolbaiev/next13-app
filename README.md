@@ -12,7 +12,4 @@ Deployed with [Vercel](https://vercel.com/).
 - Database with [MongoDB](https://www.mongodb.com)
 - Files storage with [Firebase](https://firebase.google.com/)
 - Styling with [Bulma](https://bulma.io/)
-
-## Visit page
-
-https://next13-app-eight.vercel.app/
+- 
